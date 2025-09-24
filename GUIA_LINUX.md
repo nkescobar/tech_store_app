@@ -34,7 +34,8 @@ sudo apt upgrade -y
 #### **PASO 2: Instalar PHP y Extensiones**
 ```bash
 # Instalar PHP con extensiones necesarias
-sudo apt install -y php php-cli php-sqlite3 php-json php-mbstring php-curl php-zip
+# NOTA: Este proyecto usa MySQL como BD principal, SQLite solo para desarrollo local
+sudo apt install -y php php-cli php-mysql php-sqlite3 php-json php-mbstring php-curl php-zip
 
 # Verificar instalación
 php --version
@@ -45,8 +46,15 @@ php --version
 # Git para clonar el repositorio
 sudo apt install -y git curl wget
 
-# SQLite3 para explorar la base de datos
+# 📊 IMPORTANTE: Base de Datos del Proyecto
+# Este proyecto usa MYSQL como base de datos principal para el taller
+# SQLite solo se usa automáticamente para desarrollo local
+
+# SQLite3 para explorar la base de datos local de desarrollo (opcional)
 sudo apt install -y sqlite3
+
+# MySQL para base de datos principal (opcional para desarrollo local)
+sudo apt install -y mysql-server
 
 # Nano/vim para editar archivos
 sudo apt install -y nano
@@ -69,10 +77,11 @@ sudo dnf update -y
 #### **PASO 2: Instalar PHP**
 ```bash
 # CentOS/RHEL
-sudo dnf install -y php php-cli php-pdo php-sqlite3 php-json php-mbstring
+# NOTA: Este proyecto usa MySQL como BD principal
+sudo dnf install -y php php-cli php-pdo php-mysql php-sqlite3 php-json php-mbstring
 
 # Fedora
-sudo dnf install -y php php-cli php-sqlite3 php-json php-mbstring php-curl
+sudo dnf install -y php php-cli php-mysql php-sqlite3 php-json php-mbstring php-curl
 
 # Verificar
 php --version

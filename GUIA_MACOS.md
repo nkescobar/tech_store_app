@@ -136,7 +136,7 @@ lsof -ti:8000 | xargs kill -9
 ls -la
 
 # Navegar a carpeta del proyecto
-cd ~/Desktop/web
+cd ~/tech_store_app
 
 # Abrir Finder en la carpeta actual
 open .
@@ -147,12 +147,24 @@ nano config/database.php
 
 ### **Base de Datos**
 ```bash
-# Ver base de datos SQLite
+# 📊 IMPORTANTE: Base de Datos del Proyecto
+# El proyecto usa MYSQL como base de datos principal para el taller
+# SQLite solo se usa automáticamente para desarrollo local cuando MySQL no está disponible
+
+# Ver archivos de base de datos
 ls -la database/
 
-# Consultar base de datos (si tienes sqlite3)
+# Si quieres consultar la base de datos local de desarrollo:
 brew install sqlite3
 sqlite3 database/techstore.db "SELECT * FROM productos LIMIT 5;"
+
+# NOTA: En producción (InfinityFree) se usará MySQL automáticamente
+
+# 🔧 OPCIONAL: Instalar MySQL localmente (no requerido para el taller)
+# Solo si quieres usar MySQL en desarrollo local también
+brew install mysql
+brew services start mysql
+mysql -u root -p
 ```
 
 ---
@@ -214,7 +226,7 @@ source ~/.zshrc
 ### **Configuración de Terminal**
 ```bash
 # Crear alias para inicio rápido
-echo 'alias techstore="cd ~/Desktop/web && php -S localhost:8000"' >> ~/.zshrc
+echo 'alias techstore="cd ~/tech_store_app && php -S localhost:8000"' >> ~/.zshrc
 source ~/.zshrc
 
 # Ahora solo escribe 'techstore' para iniciar
@@ -235,7 +247,7 @@ nano /opt/homebrew/etc/php/8.4/php.ini
 3. **Agregar acción "Ejecutar Script de Shell"**
 4. **Script:**
 ```bash
-cd ~/Desktop/web
+cd ~/tech_store_app
 php -S localhost:8000
 ```
 5. **Guardar como "TechStore.app"**

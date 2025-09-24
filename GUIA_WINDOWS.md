@@ -278,17 +278,17 @@ choco install microsoft-windows-terminal
 ### **Configurar Variables de Entorno Permanentes**
 ```powershell
 # Crear variable TECHSTORE_PATH
-[Environment]::SetEnvironmentVariable("TECHSTORE_PATH", "C:\Users\[TU-USUARIO]\Desktop\web", "User")
+[Environment]::SetEnvironmentVariable("TECHSTORE_PATH", "C:\Users\[TU-USUARIO]\tech_store_app", "User")
 
 # Crear alias temporal (en sesión actual)
-Set-Alias techstore "C:\Users\[TU-USUARIO]\Desktop\web\INSTALL_WINDOWS.bat"
+Set-Alias techstore "C:\Users\[TU-USUARIO]\tech_store_app\INSTALL_WINDOWS.bat"
 ```
 
 ### **Script de Inicio Automático**
 Crear `start_techstore.ps1`:
 ```powershell
 # Contenido del archivo:
-Set-Location "C:\Users\$env:USERNAME\Desktop\web"
+Set-Location "C:\Users\$env:USERNAME\tech_store_app"
 Write-Host "=== TechStore iniciando ===" -ForegroundColor Green
 php -S localhost:8000
 ```
@@ -389,13 +389,22 @@ code .
 # Firefox Developer Tools
 ```
 
-### **Base de Datos SQLite Browser**
+### **📊 Base de Datos del Proyecto**
 ```powershell
-# Instalar DB Browser para SQLite
-choco install sqlite
+# 🚨 IMPORTANTE: Este proyecto usa MYSQL como base de datos principal
+# SQLite solo se usa automáticamente para desarrollo local cuando MySQL no está disponible
 
-# Abrir base de datos
+# Ver archivos de base de datos local
+dir database\
+
+# Si quieres consultar la base de datos local de desarrollo (opcional):
+choco install sqlite
 sqlite3 database\techstore.db
+
+# 🔧 OPCIONAL: Instalar MySQL localmente (no requerido para el taller)
+# Solo si quieres usar MySQL en desarrollo local también
+choco install mysql
+# Seguir instrucciones de configuración de MySQL
 ```
 
 ---

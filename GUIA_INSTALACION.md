@@ -48,7 +48,8 @@ choco install php
 #### **En Linux (Ubuntu/Debian):**
 ```bash
 sudo apt update
-sudo apt install php php-sqlite3 php-json php-mbstring
+# IMPORTANTE: Este proyecto usa MySQL como BD principal
+sudo apt install php php-mysql php-sqlite3 php-json php-mbstring
 ```
 
 ### **PASO 2: Verificar Instalación de PHP**
@@ -112,6 +113,20 @@ PHP 8.x.x Development Server (http://localhost:8000) started
 1. **Abrir navegador**
 2. **Ir a:** `http://localhost:8000`
 3. **¡Listo!** La aplicación debería cargar con productos de ejemplo
+
+---
+
+## 📊 **BASE DE DATOS DEL PROYECTO**
+
+### **🚨 IMPORTANTE: Sistema Híbrido MySQL/SQLite**
+- **🌐 MySQL**: Base de datos principal para el taller (InfinityFree/producción)
+- **💻 SQLite**: Respaldo automático para desarrollo local
+- **🔄 Detección automática**: Sin configuración manual
+
+#### **¿Cómo funciona?**
+1. **En producción** → Usa MySQL automáticamente
+2. **En desarrollo** → Si MySQL no disponible, usa SQLite
+3. **Resultado idéntico** → Mismos datos y funcionalidad
 
 ---
 

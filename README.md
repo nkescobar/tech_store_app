@@ -8,7 +8,7 @@ TechStore es una aplicación web desarrollada en PHP para la gestión de product
 
 - ✅ **Página principal** con información del sector tecnológico
 - ✅ **Formulario de registro** para agregar productos tecnológicos
-- ✅ **Base de datos SQLite** con productos y categorías
+- ✅ **Base de datos MySQL** con productos y categorías
 - ✅ **Listado de productos** con filtros por categoría y búsqueda
 - ✅ **Gestión de categorías** tecnológicas
 - ✅ **Estadísticas** del inventario en tiempo real
@@ -17,17 +17,17 @@ TechStore es una aplicación web desarrollada en PHP para la gestión de product
 ## Tecnologías Utilizadas
 
 - **Backend**: PHP 8.x
-- **Base de Datos**: SQLite
+- **Base de Datos**: MySQL (principal) / SQLite (desarrollo local)
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+)
 - **Diseño**: CSS Grid, Flexbox, Gradientes modernos
 
 ## Estructura del Proyecto
 
 ```
-/
+tech_store_app/
 ├── index.php              # Página principal
 ├── config/
-│   └── database.php       # Configuración de base de datos
+│   └── database.php       # Configuración híbrida MySQL/SQLite
 ├── api/
 │   ├── productos.php      # API REST para productos
 │   └── categorias.php     # API REST para categorías
@@ -35,22 +35,28 @@ TechStore es una aplicación web desarrollada en PHP para la gestión de product
 │   └── styles.css         # Estilos CSS
 ├── js/
 │   └── script.js          # JavaScript frontend
-└── database/
-    └── techstore.db       # Base de datos SQLite (generada automáticamente)
+├── database/
+│   └── techstore.db       # Base de datos SQLite (solo desarrollo local)
+├── GUIA_MACOS.md          # Guía instalación macOS
+├── GUIA_WINDOWS.md        # Guía instalación Windows
+├── GUIA_LINUX.md          # Guía instalación Linux
+├── DEPLOY_INFINITYFREE.md # Guía despliegue producción
+└── README_INSTALACION.md  # Índice de todas las guías
 ```
 
 ## Instalación Local
 
 ### Prerrequisitos
 - PHP 8.0 o superior
-- Extensión PDO SQLite habilitada
+- Extensión PDO MySQL habilitada
+- MySQL 5.7+ (para producción) o SQLite (para desarrollo local)
 
 ### Instrucciones
 
 1. **Clonar el proyecto**
    ```bash
-   git clone [url-del-repositorio]
-   cd web
+   git clone https://github.com/nkescobar/tech_store_app.git
+   cd tech_store_app
    ```
 
 2. **Iniciar servidor PHP local**
@@ -65,22 +71,30 @@ TechStore es una aplicación web desarrollada en PHP para la gestión de product
 
 ## Funcionalidades Implementadas
 
-### 1. Gestión de Productos
-- Agregar productos con información completa
-- Filtrar por categoría y búsqueda de texto
-- Visualización en tarjetas con imágenes
-- Información de stock y precios
+### 1. Gestión Completa de Productos (CRUD)
+- ➕ **Agregar productos** con información completa e imágenes
+- ✏️ **Editar productos** existentes (botón azul)
+- 🗑️ **Eliminar productos** (botón rojo con confirmación)
+- 🔍 **Filtrar por categoría** y búsqueda de texto
+- 🖼️ **Imágenes con lazy loading** desde Unsplash
+- 💰 **Precios en pesos colombianos**
 
 ### 2. Gestión de Categorías
-- Crear nuevas categorías
-- Visualización de todas las categorías disponibles
-- Categorías predefinidas del sector tecnológico
+- 📂 **Crear nuevas categorías** con descripción
+- 📋 **Visualizar todas las categorías** disponibles
+- 🛠️ **6 categorías predefinidas** del sector tecnológico
 
-### 3. Estadísticas
-- Total de productos registrados
-- Stock total del inventario
-- Valor total del inventario
-- Distribución por categorías
+### 3. Panel de Estadísticas
+- 📊 **Total de productos** registrados
+- 📦 **Stock total** del inventario
+- 💲 **Valor total** del inventario en COP
+- 📈 **Gráficos por categorías** con barras visuales
+
+### 4. Interfaz Moderna
+- 📱 **100% responsive** para móviles y tablets
+- ⚡ **Lazy loading** suave sin "brincos"
+- 🎨 **Diseño moderno** con gradientes y animaciones
+- 🌐 **Compatible** con todos los navegadores
 
 ## Base de Datos
 
@@ -134,15 +148,15 @@ El sistema incluye datos de muestra del sector tecnológico:
 - Gaming
 - Wearables
 
-### Productos de Ejemplo
-- iPhone 15 Pro
-- MacBook Pro M3
-- NVIDIA RTX 4080
-- Sony WH-1000XM5
-- PlayStation 5
-- Apple Watch Series 9
-- Samsung Galaxy S24
-- Dell XPS 15
+### Productos de Ejemplo (8 productos incluidos)
+- iPhone 15 Pro ($5.499.900 COP)
+- MacBook Pro M3 ($10.599.900 COP)
+- NVIDIA RTX 4080 ($5.099.900 COP)
+- Sony WH-1000XM5 ($1.699.900 COP)
+- PlayStation 5 ($2.199.900 COP)
+- Apple Watch Series 9 ($1.699.900 COP)
+- Samsung Galaxy S24 ($3.899.900 COP)
+- Dell XPS 15 ($8.099.900 COP)
 
 ## Despliegue en InfinityFree
 

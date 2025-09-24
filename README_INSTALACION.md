@@ -100,9 +100,15 @@ php -S localhost:8000
 - 📊 **Gráficos** por categoría
 
 ### **🗄️ Base de Datos**
-- 🖥️ **SQLite** para desarrollo local
-- 🌐 **MySQL** para producción (InfinityFree)
+- 🌐 **MySQL** base de datos principal (InfinityFree/producción)
+- 🖥️ **SQLite** respaldo para desarrollo local
 - 🔄 **Detección automática** del entorno
+
+#### **📋 ¿Cómo funciona el sistema híbrido?**
+1. **🚀 En producción** (InfinityFree): Usa MySQL automáticamente
+2. **💻 En desarrollo local**: Si MySQL no está disponible, usa SQLite
+3. **🔄 Sin configuración**: El sistema detecta automáticamente qué BD usar
+4. **📊 Mismo resultado**: Los datos y funcionalidad son idénticos
 
 ---
 
@@ -111,7 +117,7 @@ php -S localhost:8000
 | Componente | Versión Mínima |
 |------------|----------------|
 | **PHP** | 8.0+ |
-| **SQLite** | 3.x (incluido en PHP) |
+| **MySQL** | 5.7+ (producción) o SQLite 3.x (desarrollo) |
 | **Navegador** | Chrome 90+, Firefox 88+, Safari 14+ |
 | **Memoria RAM** | 512 MB disponible |
 | **Disco** | 50 MB libres |

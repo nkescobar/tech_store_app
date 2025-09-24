@@ -49,6 +49,9 @@ Abrir navegador en: **http://localhost:8000**
 - ✅ Botones editar/eliminar funcionan
 - ✅ Formulario agregar funciona
 
+## 📊 **Base de Datos**
+**🚨 IMPORTANTE:** Este proyecto usa **MySQL** como base de datos principal para el taller. SQLite se usa automáticamente solo para desarrollo local cuando MySQL no está disponible.
+
 ## 🆘 **Problemas?**
 Ver: `GUIA_INSTALACION.md`
 
