@@ -104,14 +104,8 @@ tech_store_app/
 ### 3. Panel de Estadísticas
 - 📊 **Total de productos** registrados
 - 📦 **Stock total** del inventario
-- 💲 **Valor total** del inventario en COP
 - 📈 **Gráficos por categorías** con barras visuales
 
-### 4. Interfaz Moderna
-- 📱 **100% responsive** para móviles y tablets
-- ⚡ **Lazy loading** suave sin "brincos"
-- 🎨 **Diseño moderno** con gradientes y animaciones
-- 🌐 **Compatible** con todos los navegadores
 
 ## Base de Datos
 

@@ -52,7 +52,7 @@ Abrir navegador en: **http://localhost:8000**
 **🚨 IMPORTANTE:** Este proyecto usa **MySQL** como base de datos principal para el taller. SQLite se usa automáticamente solo para desarrollo local cuando MySQL no está disponible.
 
 ## 🆘 **Problemas?**
-Ver: `GUIA_INSTALACION.md`
+Ver sección "Instalación Local" en `README.md`
 
 ---
 **¡Listo en 3 minutos!** 🎉

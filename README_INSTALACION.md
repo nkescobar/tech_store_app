@@ -18,8 +18,8 @@
 | 🪟 **Windows** | **[GUIA_WINDOWS.md](GUIA_WINDOWS.md)** | Guía completa para Windows con Chocolatey |
 | 🐧 **Linux** | **[GUIA_LINUX.md](GUIA_LINUX.md)** | Ubuntu, CentOS, Arch, openSUSE y más |
 
-### **🔧 Guía Universal**
-📄 **[GUIA_INSTALACION.md](GUIA_INSTALACION.md)** - Guía general para todos los sistemas
+### **🔧 Guía General**
+📄 **[README.md](README.md)** - Documentación principal con instalación
 
 ---
 
