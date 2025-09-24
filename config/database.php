@@ -1,9 +1,9 @@
 <?php
 class Database {
-    private $host = 'localhost';
-    private $dbname = 'techstore_db';
-    private $username = 'root';
-    private $password = '';
+    private $host = 'sql200.infinityfree.com';
+    private $dbname = 'if0_40011644_techstore_db';
+    private $username = 'if0_40011644';
+    private $password = 'lqdc0hq28Ya977';
     private $pdo;
 
     public function __construct() {
