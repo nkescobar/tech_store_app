@@ -11,11 +11,16 @@
         <nav class="navbar">
             <div class="nav-container">
                 <h1 class="nav-logo">🖥️ TechStore</h1>
-                <div class="nav-menu">
-                    <a href="#productos" class="nav-link">Productos</a>
-                    <a href="#agregar" class="nav-link">Agregar</a>
-                    <a href="#categorias" class="nav-link">Categorías</a>
-                    <a href="#estadisticas" class="nav-link">Estadísticas</a>
+                <button class="nav-toggle" onclick="toggleNavMenu()" aria-label="Abrir menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="#productos" class="nav-link" onclick="closeNavMenu()">Productos</a>
+                    <a href="#agregar" class="nav-link" onclick="closeNavMenu()">Agregar</a>
+                    <a href="#categorias" class="nav-link" onclick="closeNavMenu()">Categorías</a>
+                    <a href="#estadisticas" class="nav-link" onclick="closeNavMenu()">Estadísticas</a>
                 </div>
             </div>
         </nav>

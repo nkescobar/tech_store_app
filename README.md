@@ -95,7 +95,6 @@ tech_store_app/
 - 🗑️ **Eliminar productos** (botón rojo con confirmación)
 - 🔍 **Filtrar por categoría** y búsqueda de texto
 - 🖼️ **Imágenes con lazy loading** desde Unsplash
-- 💰 **Precios en pesos colombianos**
 
 ### 2. Gestión de Categorías
 - 📂 **Crear nuevas categorías** con descripción
@@ -196,25 +195,7 @@ El sistema incluye datos de muestra del sector tecnológico:
    - Verificar que el sitio carga correctamente
    - Probar formularios y base de datos
 
-## Consideraciones de Arquitectura Cloud
 
-### Limitaciones del Hosting Gratuito
-- **Disponibilidad**: Tiempo de actividad no garantizado
-- **Escalabilidad**: Recursos limitados para alto tráfico
-- **Seguridad**: Menor control sobre configuraciones de seguridad
-
-### Migración a AWS
-1. **EC2**: Para el servidor web y aplicación PHP
-2. **RDS**: Para la base de datos MySQL/PostgreSQL
-3. **S3**: Para almacenamiento de imágenes de productos
-4. **Route 53**: Para gestión de DNS y dominio
-
-## Seguridad Implementada
-
-- Validación de entrada en formularios
-- Uso de declaraciones preparadas (PDO)
-- Validación de URLs de imágenes
-- Manejo de errores controlado
 
 ## Autor
 

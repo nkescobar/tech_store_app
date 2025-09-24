@@ -421,3 +421,32 @@ async function eliminarProducto(id) {
         mostrarMensaje('Error al eliminar producto', 'error');
     }
 }
+
+// Funciones para el navbar móvil
+function toggleNavMenu() {
+    const navMenu = document.getElementById('navMenu');
+    const navToggle = document.querySelector('.nav-toggle');
+
+    navMenu.classList.toggle('active');
+    navToggle.classList.toggle('active');
+}
+
+function closeNavMenu() {
+    const navMenu = document.getElementById('navMenu');
+    const navToggle = document.querySelector('.nav-toggle');
+
+    navMenu.classList.remove('active');
+    navToggle.classList.remove('active');
+}
+
+// Cerrar menú al hacer clic fuera de él
+document.addEventListener('click', function(event) {
+    const navMenu = document.getElementById('navMenu');
+    const navToggle = document.querySelector('.nav-toggle');
+    const navContainer = document.querySelector('.nav-container');
+
+    if (!navContainer.contains(event.target)) {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+    }
+});

@@ -45,7 +45,6 @@ Abrir navegador en: **http://localhost:8000**
 
 ## ✅ **Verificar**
 - ✅ Página carga con productos
-- ✅ Precios en pesos colombianos
 - ✅ Botones editar/eliminar funcionan
 - ✅ Formulario agregar funciona
 
