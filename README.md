@@ -4,6 +4,24 @@
 
 TechStore es una aplicación web desarrollada en PHP para la gestión de productos tecnológicos. Este proyecto fue creado como parte del **Taller Diagnóstico - Sitio Web en Hosting Gratuito** para el sector tecnológico.
 
+## 📚 **Guías de Instalación**
+
+### **⚡ Inicio Rápido**
+📄 **[INICIO_RAPIDO.md](INICIO_RAPIDO.md)** - Instalar y ejecutar en 3 minutos
+
+### **📋 Guías por Sistema Operativo**
+| Sistema | Guía | Descripción |
+|---------|------|-------------|
+| 🍎 **macOS** | **[GUIA_MACOS.md](GUIA_MACOS.md)** | Instalación completa con Homebrew |
+| 🪟 **Windows** | **[GUIA_WINDOWS.md](GUIA_WINDOWS.md)** | Instalación completa con Chocolatey |
+| 🐧 **Linux** | **[GUIA_LINUX.md](GUIA_LINUX.md)** | Ubuntu, CentOS, Arch y más |
+
+### **🚀 Despliegue en Producción**
+📄 **[DEPLOY_INFINITYFREE.md](DEPLOY_INFINITYFREE.md)** - Subir a InfinityFree paso a paso
+
+### **📖 Índice Completo**
+📄 **[README_INSTALACION.md](README_INSTALACION.md)** - Todas las guías organizadas
+
 ## Características
 
 - ✅ **Página principal** con información del sector tecnológico
