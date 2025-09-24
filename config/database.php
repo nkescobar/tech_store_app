@@ -1,0 +1,152 @@
+<?php
+class Database {
+    private $host = 'localhost';
+    private $dbname = 'techstore_db';
+    private $username = 'root';
+    private $password = '';
+    private $pdo;
+
+    public function __construct() {
+        try {
+            // Detectar entorno: usar MySQL en producción, SQLite en desarrollo local
+            if ($this->isProduction()) {
+                $this->connectMySQL();
+            } else {
+                $this->connectSQLite();
+            }
+
+            $this->createTables();
+            $this->insertInitialData();
+        } catch(PDOException $e) {
+            die("Error de conexión: " . $e->getMessage());
+        }
+    }
+
+    private function isProduction() {
+        // Detectar si estamos en InfinityFree u otro hosting
+        return isset($_SERVER['SERVER_NAME']) &&
+               strpos($_SERVER['SERVER_NAME'], 'infinityfree') !== false;
+    }
+
+    private function connectMySQL() {
+        $dsn = "mysql:host={$this->host};dbname={$this->dbname};charset=utf8mb4";
+        $this->pdo = new PDO($dsn, $this->username, $this->password);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    }
+
+    private function connectSQLite() {
+        // Para desarrollo local
+        $dbPath = __DIR__ . '/../database/techstore.db';
+
+        // Crear directorio si no existe
+        $dbDir = dirname($dbPath);
+        if (!is_dir($dbDir)) {
+            mkdir($dbDir, 0755, true);
+        }
+
+        $this->pdo = new PDO('sqlite:' . $dbPath);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    }
+
+    private function createDatabaseIfNotExists() {
+        // Para desarrollo local, volvemos a usar SQLite temporalmente
+        // En InfinityFree se puede cambiar a MySQL fácilmente
+        return;
+    }
+
+    public function getConnection() {
+        return $this->pdo;
+    }
+
+    private function createTables() {
+        if ($this->isProduction()) {
+            // Sintaxis MySQL para producción
+            $sqlProductos = "CREATE TABLE IF NOT EXISTS productos (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                nombre VARCHAR(255) NOT NULL,
+                categoria VARCHAR(100) NOT NULL,
+                precio DECIMAL(10,2) NOT NULL,
+                descripcion TEXT,
+                marca VARCHAR(100),
+                stock INT DEFAULT 0,
+                imagen_url VARCHAR(500),
+                fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+
+            $sqlCategorias = "CREATE TABLE IF NOT EXISTS categorias (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                nombre VARCHAR(100) UNIQUE NOT NULL,
+                descripcion TEXT
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+        } else {
+            // Sintaxis SQLite para desarrollo local
+            $sqlProductos = "CREATE TABLE IF NOT EXISTS productos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nombre TEXT NOT NULL,
+                categoria TEXT NOT NULL,
+                precio REAL NOT NULL,
+                descripcion TEXT,
+                marca TEXT,
+                stock INTEGER DEFAULT 0,
+                imagen_url TEXT,
+                fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP
+            )";
+
+            $sqlCategorias = "CREATE TABLE IF NOT EXISTS categorias (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nombre TEXT UNIQUE NOT NULL,
+                descripcion TEXT
+            )";
+        }
+
+        $this->pdo->exec($sqlProductos);
+        $this->pdo->exec($sqlCategorias);
+    }
+
+    private function insertInitialData() {
+        // Verificar si ya existen categorías
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM categorias");
+        $count = $stmt->fetchColumn();
+
+        if ($count == 0) {
+            $categorias = [
+                ['Smartphones', 'Teléfonos móviles y accesorios'],
+                ['Laptops', 'Computadoras portátiles'],
+                ['Componentes PC', 'Procesadores, tarjetas gráficas, RAM, etc.'],
+                ['Audio', 'Audífonos, parlantes, micrófonos'],
+                ['Gaming', 'Consolas, juegos, accesorios gaming'],
+                ['Wearables', 'Smartwatches, fitness trackers']
+            ];
+
+            $stmt = $this->pdo->prepare("INSERT INTO categorias (nombre, descripcion) VALUES (?, ?)");
+            foreach ($categorias as $categoria) {
+                $stmt->execute($categoria);
+            }
+        }
+
+        // Verificar si ya existen productos
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM productos");
+        $count = $stmt->fetchColumn();
+
+        if ($count == 0) {
+            $productos = [
+                ['iPhone 15 Pro', 'Smartphones', 5499900.00, 'Último modelo de iPhone con chip A17 Pro', 'Apple', 25, 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=300&fit=crop'],
+                ['MacBook Pro M3', 'Laptops', 10599900.00, 'Laptop profesional con chip M3 y 16GB RAM', 'Apple', 15, 'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=300&fit=crop'],
+                ['NVIDIA RTX 4080', 'Componentes PC', 5099900.00, 'Tarjeta gráfica de alta gama para gaming', 'NVIDIA', 8, 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&h=300&fit=crop'],
+                ['Sony WH-1000XM5', 'Audio', 1699900.00, 'Audífonos inalámbricos con cancelación de ruido', 'Sony', 30, 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&h=300&fit=crop'],
+                ['PlayStation 5', 'Gaming', 2199900.00, 'Consola de videojuegos de nueva generación', 'Sony', 12, 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=300&fit=crop'],
+                ['Apple Watch Series 9', 'Wearables', 1699900.00, 'Smartwatch con GPS y monitoreo de salud', 'Apple', 20, 'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=400&h=300&fit=crop'],
+                ['Samsung Galaxy S24', 'Smartphones', 3899900.00, 'Smartphone Android con cámara de 200MP', 'Samsung', 35, 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop'],
+                ['Dell XPS 15', 'Laptops', 8099900.00, 'Laptop premium con pantalla OLED 4K', 'Dell', 18, 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=300&fit=crop']
+            ];
+
+            $stmt = $this->pdo->prepare("INSERT INTO productos (nombre, categoria, precio, descripcion, marca, stock, imagen_url) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            foreach ($productos as $producto) {
+                $stmt->execute($producto);
+            }
+        }
+    }
+}
+?>
