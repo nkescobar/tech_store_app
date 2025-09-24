@@ -1,6 +1,6 @@
 <?php
 class Database {
-    private $host = 'sql200.infinityfree.com';
+    private $host = 'sql303.infinityfree.com';
     private $dbname = 'if0_40011644_techstore_db';
     private $username = 'if0_40011644';
     private $password = 'lqdc0hq28Ya977';
@@ -29,10 +29,18 @@ class Database {
     }
 
     private function connectMySQL() {
-        $dsn = "mysql:host={$this->host};dbname={$this->dbname};charset=utf8mb4";
-        $this->pdo = new PDO($dsn, $this->username, $this->password);
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        $dsn = "mysql:host={$this->host};port=3306;dbname={$this->dbname};charset=utf8mb4";
+
+        // Opciones específicas para InfinityFree
+        $options = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_PERSISTENT => false,
+            PDO::ATTR_TIMEOUT => 30,
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
+        ];
+
+        $this->pdo = new PDO($dsn, $this->username, $this->password, $options);
     }
 
     private function connectSQLite() {
