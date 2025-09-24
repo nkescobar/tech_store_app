@@ -132,11 +132,6 @@ php -S localhost:8000
 3. **Imágenes no cargan** → Verificar conexión a internet
 4. **Base de datos vacía** → Eliminar `database/techstore.db` y recargar
 
-### **📞 Contacto**
-- **GitHub Issues:** https://github.com/nkescobar/tech_store_app/issues
-- **Discord/Slack:** Canal del equipo
-- **Email:** [tu-email@universidad.edu]
-
 ---
 
 ## 📊 **DATOS DE PRUEBA INCLUIDOS**

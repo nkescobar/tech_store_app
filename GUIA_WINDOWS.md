@@ -488,11 +488,6 @@ choco repair
 sfc /scannow
 ```
 
-### **Contacto de Soporte**
-- **GitHub Issues:** [URL del repositorio]
-- **Discord/Slack:** Canal del equipo
-- **Email:** soporte@techstore.com
-
 ---
 
 ## 🎮 **ATAJOS DE TECLADO ÚTILES**

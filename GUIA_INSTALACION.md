@@ -308,10 +308,6 @@ curl http://localhost:8000/api/categorias.php
 - 🌐 **Verificar** que el puerto 8000 esté libre
 - 🔄 **Reiniciar** el servidor PHP si hay problemas
 
-### **Contacto**
-- **Slack/Discord:** Canal del equipo
-- **Email:** [tu-email@universidad.edu]
-
 ---
 
 ## 📚 **RECURSOS ADICIONALES**
