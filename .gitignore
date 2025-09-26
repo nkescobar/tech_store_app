@@ -4,6 +4,9 @@ database/techstore.db
 # Configuración FTP (contiene credenciales sensibles)
 ftp-config
 
+# Variables de entorno (contiene credenciales sensibles)
+.env
+
 # Archivos del sistema
 .DS_Store
 Thumbs.db

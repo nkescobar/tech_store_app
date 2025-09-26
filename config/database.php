@@ -1,13 +1,16 @@
 <?php
 class Database {
-    private $host = 'sql303.infinityfree.com';
-    private $dbname = 'if0_40011644_techstore_db';
-    private $username = 'if0_40011644';
-    private $password = 'lqdc0hq28Ya977';
+    private $host;
+    private $dbname;
+    private $username;
+    private $password;
     private $pdo;
 
     public function __construct() {
         try {
+            // Cargar configuración según el ambiente
+            $this->loadConfig();
+
             // Detectar entorno: usar MySQL en producción, SQLite en desarrollo local
             if ($this->isProduction()) {
                 $this->connectMySQL();
@@ -22,6 +25,22 @@ class Database {
         }
     }
 
+    private function loadConfig() {
+        if ($this->isProduction()) {
+            // Configuración para producción (InfinityFree)
+            $this->host = 'sql303.infinityfree.com';
+            $this->dbname = 'if0_40011644_techstore_db';
+            $this->username = 'if0_40011644';
+            $this->password = 'lqdc0hq28Ya977';
+        } else {
+            // Configuración para desarrollo local (MySQL opcional)
+            $this->host = 'localhost';
+            $this->dbname = 'techstore_db';
+            $this->username = 'root';
+            $this->password = '';
+        }
+    }
+
     private function isProduction() {
         // Detectar si estamos en InfinityFree u otro hosting
         // También forzar MySQL si la variable DEBUG_MYSQL está definida
@@ -31,16 +50,24 @@ class Database {
     }
 
     private function connectMySQL() {
-        $dsn = "mysql:host={$this->host};port=3306;dbname={$this->dbname};charset=utf8mb4";
-
-        // Opciones específicas para InfinityFree
-        $options = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_PERSISTENT => false,
-            PDO::ATTR_TIMEOUT => 30,
-            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
-        ];
+        if ($this->isProduction()) {
+            // Configuración específica para InfinityFree
+            $dsn = "mysql:host={$this->host};port=3306;dbname={$this->dbname};charset=utf8mb4";
+            $options = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_PERSISTENT => false,
+                PDO::ATTR_TIMEOUT => 30,
+                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
+            ];
+        } else {
+            // Configuración para desarrollo local
+            $dsn = "mysql:host={$this->host};dbname={$this->dbname};charset=utf8mb4";
+            $options = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ];
+        }
 
         $this->pdo = new PDO($dsn, $this->username, $this->password, $options);
     }
@@ -60,11 +87,6 @@ class Database {
         $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
 
-    private function createDatabaseIfNotExists() {
-        // Para desarrollo local, volvemos a usar SQLite temporalmente
-        // En InfinityFree se puede cambiar a MySQL fácilmente
-        return;
-    }
 
     public function getConnection() {
         return $this->pdo;
@@ -159,4 +181,3 @@ class Database {
         }
     }
 }
-?>

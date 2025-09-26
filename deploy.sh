@@ -44,9 +44,12 @@ upload_file() {
 
     echo -e "${YELLOW}📤 Subiendo: $file${NC}"
 
+    # Extraer solo el nombre del archivo para el destino
+    filename=$(basename "$file")
+
     curl -T "$LOCAL_PATH/$file" \
          -u "$FTP_USER:$FTP_PASS" \
-         "ftp://$FTP_HOST/$REMOTE_PATH/$remote_dir/$file"
+         "ftp://$FTP_HOST/$REMOTE_PATH/$remote_dir/$filename"
 
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✅ $file subido exitosamente${NC}"
@@ -67,7 +70,7 @@ upload_all() {
     upload_file "categorias.php" "api"
 
     # Configuración
-    upload_file "database.php" "config"
+    upload_file "config/database.php" "config"
 
     # Frontend
     upload_file "styles.css" "css"
@@ -89,7 +92,7 @@ case $1 in
         upload_file "categorias.php" "api"
         ;;
     "config")
-        upload_file "database.php" "config"
+        upload_file "config/database.php" "config"
         ;;
     "js")
         upload_file "script.js" "js"
