@@ -66,8 +66,8 @@ upload_all() {
     upload_file "index.php" ""
 
     # API
-    upload_file "productos.php" "api"
-    upload_file "categorias.php" "api"
+    upload_file "api/productos.php" "api"
+    upload_file "api/categorias.php" "api"
 
     # Configuración
     upload_file "config/database.php" "config"
@@ -88,8 +88,8 @@ case $1 in
         upload_file "index.php" ""
         ;;
     "api")
-        upload_file "productos.php" "api"
-        upload_file "categorias.php" "api"
+        upload_file "api/productos.php" "api"
+        upload_file "api/categorias.php" "api"
         ;;
     "config")
         upload_file "config/database.php" "config"

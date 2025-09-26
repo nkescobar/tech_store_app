@@ -31,6 +31,14 @@ async function cargarCategorias() {
             categoriaCard.innerHTML = `
                 <div class="categoria-nombre">${categoria.nombre}</div>
                 <div class="categoria-descripcion">${categoria.descripcion || 'Sin descripción'}</div>
+                <div class="categoria-acciones">
+                    <button onclick="editarCategoria(${categoria.id})" class="btn-editar">
+                        Editar
+                    </button>
+                    <button onclick="eliminarCategoria(${categoria.id})" class="btn-eliminar">
+                        Eliminar
+                    </button>
+                </div>
             `;
             categoriasLista.appendChild(categoriaCard);
         });
@@ -193,28 +201,53 @@ function configurarFormularios() {
     categoriaForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        const formData = {
-            nombre: document.getElementById('categoriaNombre').value,
-            descripcion: document.getElementById('categoriaDescripcion').value
-        };
-
         try {
-            const response = await fetch('api/categorias.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
+            if (editandoCategoriaId) {
+                // Actualizar categoría existente
+                const formData = new FormData();
+                formData.append('_method', 'PUT');
+                formData.append('id', editandoCategoriaId);
+                formData.append('nombre', document.getElementById('categoriaNombre').value);
+                formData.append('descripcion', document.getElementById('categoriaDescripcion').value);
 
-            const result = await response.json();
+                const response = await fetch('api/categorias.php', {
+                    method: 'POST',
+                    body: formData
+                });
 
-            if (response.ok) {
-                mostrarMensaje('Categoría agregada exitosamente', 'exito', categoriaForm.parentNode);
-                categoriaForm.reset();
-                cargarCategorias();
+                const result = await response.json();
+
+                if (response.ok) {
+                    mostrarMensaje('Categoría actualizada exitosamente', 'exito', categoriaForm.parentNode);
+                    cancelarEdicionCategoria();
+                    cargarCategorias();
+                } else {
+                    mostrarMensaje('Error al actualizar categoría: ' + (result.error || 'Error desconocido'), 'error', categoriaForm.parentNode);
+                }
             } else {
-                mostrarMensaje('Error al agregar categoría: ' + (result.error || 'Error desconocido'), 'error', categoriaForm.parentNode);
+                // Crear nueva categoría
+                const formData = {
+                    nombre: document.getElementById('categoriaNombre').value,
+                    descripcion: document.getElementById('categoriaDescripcion').value
+                };
+
+                const response = await fetch('api/categorias.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    mostrarMensaje('Categoría agregada exitosamente', 'exito', categoriaForm.parentNode);
+                    categoriaForm.reset();
+                    cargarCategorias();
+                } else {
+                    mostrarMensaje('Error al agregar categoría: ' + (result.error || 'Error desconocido'), 'error', categoriaForm.parentNode);
+                }
             }
         } catch (error) {
             console.error('Error:', error);
@@ -492,3 +525,119 @@ document.addEventListener('click', function(event) {
         navToggle.classList.remove('active');
     }
 });
+
+// Variables globales para edición de categorías
+let editandoCategoriaId = null;
+
+// Función para editar categoría
+async function editarCategoria(id) {
+    try {
+        const response = await fetch(`api/categorias.php?id=${id}`);
+        const categoria = await response.json();
+
+        if (response.ok) {
+            // Cambiar el título del formulario
+            const tituloFormulario = document.querySelector('.categorias-form h4');
+            tituloFormulario.innerHTML = '✏️ Editando Categoría';
+
+            // Cambiar fondo del formulario para indicar modo edición
+            const formularioCategoria = document.querySelector('.categorias-form');
+            formularioCategoria.classList.add('modo-edicion-categoria');
+
+            // Llenar el formulario con los datos de la categoría
+            document.getElementById('categoriaNombre').value = categoria.nombre;
+            document.getElementById('categoriaDescripcion').value = categoria.descripcion;
+
+            // Cambiar el botón del formulario
+            const submitBtn = document.querySelector('#categoriaForm button[type="submit"]');
+            submitBtn.textContent = 'Actualizar Categoría';
+            submitBtn.className = 'btn-actualizar';
+
+            // Añadir botón cancelar si no existe
+            if (!document.querySelector('.btn-cancelar-categoria')) {
+                const cancelBtn = document.createElement('button');
+                cancelBtn.type = 'button';
+                cancelBtn.textContent = 'Cancelar Edición';
+                cancelBtn.className = 'btn-cancelar-categoria';
+                cancelBtn.onclick = cancelarEdicionCategoria;
+                submitBtn.parentNode.insertBefore(cancelBtn, submitBtn.nextSibling);
+            }
+
+            editandoCategoriaId = id;
+
+            // Scroll al formulario
+            document.getElementById('categorias').scrollIntoView({ behavior: 'smooth' });
+
+            mostrarMensaje(`Editando categoría: "${categoria.nombre}"`, 'warning');
+        } else {
+            mostrarMensaje('Error al cargar categoría: ' + categoria.error, 'error');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        mostrarMensaje('Error al cargar categoría', 'error');
+    }
+}
+
+// Función para cancelar edición de categoría
+function cancelarEdicionCategoria() {
+    // Restaurar título del formulario
+    const tituloFormulario = document.querySelector('.categorias-form h4');
+    tituloFormulario.innerHTML = 'Agregar Nueva Categoría';
+
+    // Quitar modo edición
+    const formularioCategoria = document.querySelector('.categorias-form');
+    formularioCategoria.classList.remove('modo-edicion-categoria');
+
+    // Limpiar formulario
+    const form = document.getElementById('categoriaForm');
+    form.reset();
+
+    // Restaurar botón original
+    const submitBtn = document.querySelector('#categoriaForm button[type="submit"]');
+    submitBtn.textContent = 'Agregar Categoría';
+    submitBtn.className = '';
+
+    // Remover botón cancelar
+    const cancelBtn = document.querySelector('.btn-cancelar-categoria');
+    if (cancelBtn) {
+        cancelBtn.remove();
+    }
+
+    editandoCategoriaId = null;
+    mostrarMensaje('Edición de categoría cancelada', 'info');
+}
+
+// Función para eliminar categoría
+async function eliminarCategoria(id) {
+    if (!confirm('¿Estás seguro de que quieres eliminar esta categoría?')) {
+        return;
+    }
+
+    try {
+        const formData = new FormData();
+        formData.append('_method', 'DELETE');
+        formData.append('id', id);
+
+        const response = await fetch('api/categorias.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+        console.log('Respuesta eliminación categoría:', response.status, result);
+
+        if (response.ok) {
+            mostrarMensaje('Categoría eliminada exitosamente', 'exito');
+            cargarCategorias();
+        } else {
+            // Mostrar error en un alert más visible para casos específicos
+            if (result.error && result.error.includes('producto')) {
+                alert('⚠️ ' + result.error);
+            }
+            mostrarMensaje('Error: ' + (result.error || 'Error desconocido'), 'error');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        mostrarMensaje('Error al conectar con el servidor', 'error');
+    }
+}

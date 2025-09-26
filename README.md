@@ -1,200 +1,150 @@
-# TechStore - Sistema de Gestión de Productos Tecnológicos
+# 🌐 Proyecto Web en InfinityFree – Sector Tecnológico
 
-## Descripción del Proyecto
+## 👥 Integrantes y Roles
+- **[Nombre completo]**  – Líder / Coordinador
+- **[Nombre completo]** – Desarrollador Backend
+- **[Nombre completo]** – Desarrollador Frontend / UI
+- **[Nombre completo]** – Administrador de Base de Datos (DBA)
+- **[Nombre completo]** – DevOps / Deployment
+- **[Nombre completo]** – QA / Tester
+- **[Nombre completo]** – Documentador / Presentador
 
-TechStore es una aplicación web desarrollada en PHP para la gestión de productos tecnológicos. Este proyecto fue creado como parte del **Taller Diagnóstico - Sitio Web en Hosting Gratuito** para el sector tecnológico.
+## 📖 Descripción del Proyecto
+**TechStore** es una aplicación web completa para la gestión de productos tecnológicos desarrollada en PHP con MySQL.
+Permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) tanto en productos como categorías, con una interfaz responsive
+y moderna. El sistema incluye validaciones de integridad referencial y está optimizado para dispositivos móviles.
 
-## 📚 **Guías de Instalación**
+## 🚀 Instrucciones de Uso
+1. **Configurar Base de Datos**: Crear base de datos MySQL en InfinityFree
+2. **Subir Archivos**: Cargar todos los archivos del proyecto a la carpeta `htdocs`
+3. **Configurar Conexión**: La aplicación detecta automáticamente el entorno de InfinityFree
+   - Host: `sql303.infinityfree.com`
+   - Usuario: `if0_40011644`
+   - Base de datos: `if0_40011644_techstore_db`
+4. **Acceder al Sitio**:
+   👉 **https://techstoreapp.infinityfreeapp.com**
 
-### **⚡ Inicio Rápido**
-📄 **[INICIO_RAPIDO.md](INICIO_RAPIDO.md)** - Instalar y ejecutar en 3 minutos
-
-### **📋 Guías por Sistema Operativo**
-| Sistema | Guía | Descripción |
-|---------|------|-------------|
-| 🍎 **macOS** | **[GUIA_MACOS.md](GUIA_MACOS.md)** | Instalación completa con Homebrew |
-| 🪟 **Windows** | **[GUIA_WINDOWS.md](GUIA_WINDOWS.md)** | Instalación completa con Chocolatey |
-| 🐧 **Linux** | **[GUIA_LINUX.md](GUIA_LINUX.md)** | Ubuntu, CentOS, Arch y más |
-
-### **🚀 Despliegue en Producción**
-📄 **[DEPLOY_INFINITYFREE.md](DEPLOY_INFINITYFREE.md)** - Subir a InfinityFree paso a paso
-
-### **📖 Índice Completo**
-📄 **[README_INSTALACION.md](README_INSTALACION.md)** - Todas las guías organizadas
-
-## Características
-
-- ✅ **Página principal** con información del sector tecnológico
-- ✅ **Formulario de registro** para agregar productos tecnológicos
-- ✅ **Base de datos MySQL** con productos y categorías
-- ✅ **Listado de productos** con filtros por categoría y búsqueda
-- ✅ **Gestión de categorías** tecnológicas
-- ✅ **Estadísticas** del inventario en tiempo real
-- ✅ **Diseño responsive** y moderno
-
-## Tecnologías Utilizadas
-
-- **Backend**: PHP 8.x
-- **Base de Datos**: MySQL (principal) / SQLite (desarrollo local)
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Diseño**: CSS Grid, Flexbox, Gradientes modernos
-
-## Estructura del Proyecto
-
-```
-tech_store_app/
-├── index.php              # Página principal
-├── config/
-│   └── database.php       # Configuración híbrida MySQL/SQLite
-├── api/
-│   ├── productos.php      # API REST para productos
-│   └── categorias.php     # API REST para categorías
-├── css/
-│   └── styles.css         # Estilos CSS
-├── js/
-│   └── script.js          # JavaScript frontend
-├── database/
-│   └── techstore.db       # Base de datos SQLite (solo desarrollo local)
-├── GUIA_MACOS.md          # Guía instalación macOS
-├── GUIA_WINDOWS.md        # Guía instalación Windows
-├── GUIA_LINUX.md          # Guía instalación Linux
-├── DEPLOY_INFINITYFREE.md # Guía despliegue producción
-└── README_INSTALACION.md  # Índice de todas las guías
-```
-
-## Instalación Local
-
-### Prerrequisitos
-- PHP 8.0 o superior
-- Extensión PDO MySQL habilitada
-- MySQL 5.7+ (para producción) o SQLite (para desarrollo local)
-
-### Instrucciones
-
-1. **Clonar el proyecto**
-   ```bash
-   git clone https://github.com/nkescobar/tech_store_app.git
-   cd tech_store_app
-   ```
-
-2. **Iniciar servidor PHP local**
-   ```bash
-   php -S localhost:8000
-   ```
-
-3. **Abrir en navegador**
-   ```
-   http://localhost:8000
-   ```
-
-## Funcionalidades Implementadas
-
-### 1. Gestión Completa de Productos (CRUD)
-- ➕ **Agregar productos** con información completa e imágenes
-- ✏️ **Editar productos** existentes (botón azul)
-- 🗑️ **Eliminar productos** (botón rojo con confirmación)
-- 🔍 **Filtrar por categoría** y búsqueda de texto
-- 🖼️ **Imágenes con lazy loading** desde Unsplash
-
-### 2. Gestión de Categorías
-- 📂 **Crear nuevas categorías** con descripción
-- 📋 **Visualizar todas las categorías** disponibles
-- 🛠️ **6 categorías predefinidas** del sector tecnológico
-
-### 3. Panel de Estadísticas
-- 📊 **Total de productos** registrados
-- 📦 **Stock total** del inventario
-- 📈 **Gráficos por categorías** con barras visuales
+## 🖼️ Evidencias de Despliegue
+- **URL del sitio**: https://techstoreapp.infinityfreeapp.com
+- **Base de datos MySQL**: `if0_40011644_techstore_db` con ≥8 productos y 6 categorías
+- **Archivos desplegados**: Todos los archivos PHP, CSS, JS subidos via FTP
+- **Funcionalidad verificada**: CRUD completo productos y categorías
 
 
-## Base de Datos
+## 📝 Changelog (registro de cambios)
+
+## ❓ Preguntas de Reflexión (Cloud)
+
+### 1. ¿Qué es despliegue y cómo lo hicieron en este proyecto?
+> **Respuesta:** El despliegue es el proceso de poner una aplicación en funcionamiento en un servidor de producción accesible por usuarios finales. En este proyecto utilizamos InfinityFree como hosting gratuito, subiendo los archivos PHP via FTP, configurando una base de datos MySQL remota, y estableciendo la URL pública. Creamos un script automatizado (`deploy.sh`) que facilita la subida de archivos específicos (CSS, JS, API) de manera selectiva.
+
+### 2. ¿Qué limitaciones encontraron en InfinityFree?
+> **Respuesta:** Las principales limitaciones fueron: (1) No soporte para métodos HTTP PUT/DELETE, solucionado usando POST con parámetro `_method`, (2) Restricciones de ancho de banda y storage limitado, (3) No soporte para HTTPS personalizado sin upgrade, (4) Limitaciones en configuración de PHP y extensiones, (5) Posibles suspensiones por inactividad, (6) Rendimiento limitado comparado con servicios premium.
+
+### 3. ¿Qué servicio equivalente usarían en AWS, Azure o GCP para:
+> **Archivos estáticos:** AWS S3 + CloudFront, Azure Blob Storage + CDN, GCP Cloud Storage + Cloud CDN
+>
+> **Base de datos:** AWS RDS MySQL, Azure Database for MySQL, GCP Cloud SQL MySQL
+>
+> **Hosting del sitio:** AWS Elastic Beanstalk o EC2 + ALB, Azure App Service, GCP App Engine o Compute Engine
+
+### 4. ¿Cómo resolverían escalabilidad y alta disponibilidad en la nube?
+> **Respuesta:** Implementaríamos: (1) **Auto Scaling Groups** para ajustar instancias según demanda, (2) **Load Balancers** distribuyendo tráfico entre múltiples servidores, (3) **Base de datos replicada** con read replicas y failover automático, (4) **CDN global** para contenido estático, (5) **Múltiples zonas de disponibilidad** para redundancia geográfica, (6) **Monitoreo y alertas** con AWS CloudWatch/Azure Monitor/GCP Monitoring, (7) **CI/CD pipelines** para deployments zero-downtime.
+
+### 5. Plan de migración en 4–5 pasos desde InfinityFree hacia un servicio en la nube
+> **Respuesta:**
+>
+> **Paso 1:** Provisionar infraestructura cloud (VPC, subnets, security groups, RDS MySQL, EC2/App Service)
+>
+> **Paso 2:** Migrar base de datos exportando dump de MySQL actual e importándolo en RDS/Cloud SQL con configuración de conectividad
+>
+> **Paso 3:** Adaptar código actualizando strings de conexión, configurando variables de entorno, y ajustando para cloud-native features
+>
+> **Paso 4:** Implementar CI/CD con GitHub Actions/Azure DevOps/Cloud Build para automated deployment desde repositorio git
+>
+> **Paso 5:** Configurar monitoreo, logging, backups automáticos, y realizar testing completo antes de cambiar DNS para cutover final
+
+---
+
+## 📋 Documentación Técnica Adicional
+
+### **⚡ Guías de Desarrollo Local**
+- 📄 **[INICIO_RAPIDO.md](INICIO_RAPIDO.md)** - Ejecutar en 3 minutos
+- 🍎 **[GUIA_MACOS.md](GUIA_MACOS.md)** - Instalación completa macOS
+- 🪟 **[GUIA_WINDOWS.md](GUIA_WINDOWS.md)** - Instalación completa Windows
+- 🐧 **[GUIA_LINUX.md](GUIA_LINUX.md)** - Instalación Ubuntu/CentOS/Arch
+
+### **🚀 Guías de Despliegue**
+- 📄 **[DEPLOY_INFINITYFREE.md](DEPLOY_INFINITYFREE.md)** - Despliegue paso a paso
+- 📄 **[README_DEPLOY.md](README_DEPLOY.md)** - Script de deployment automático
+
+---
+
+## 🗄️ Base de Datos
 
 ### Tabla `productos`
 ```sql
 CREATE TABLE productos (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL,
-    categoria TEXT NOT NULL,
-    precio REAL NOT NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    categoria VARCHAR(100) NOT NULL,
+    precio DECIMAL(10,2) NOT NULL,
     descripcion TEXT,
-    marca TEXT,
-    stock INTEGER DEFAULT 0,
-    imagen_url TEXT,
-    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP
-);
+    marca VARCHAR(100),
+    stock INT DEFAULT 0,
+    imagen_url VARCHAR(500),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ```
 
 ### Tabla `categorias`
 ```sql
 CREATE TABLE categorias (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT UNIQUE NOT NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) UNIQUE NOT NULL,
     descripcion TEXT
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ```
 
-## API REST Endpoints
+## 🔗 API REST Endpoints
 
 ### Productos
 - `GET /api/productos.php` - Listar todos los productos
+- `GET /api/productos.php?id={id}` - Obtener producto específico
 - `GET /api/productos.php?categoria=X` - Filtrar por categoría
 - `GET /api/productos.php?busqueda=X` - Buscar productos
 - `POST /api/productos.php` - Crear nuevo producto
-- `PUT /api/productos.php/{id}` - Actualizar producto
-- `DELETE /api/productos.php/{id}` - Eliminar producto
+- `POST /api/productos.php` + `_method=PUT` + `id` - Actualizar producto
+- `POST /api/productos.php` + `_method=DELETE` + `id` - Eliminar producto
 
 ### Categorías
 - `GET /api/categorias.php` - Listar todas las categorías
+- `GET /api/categorias.php?id={id}` - Obtener categoría específica
 - `POST /api/categorias.php` - Crear nueva categoría
+- `POST /api/categorias.php` + `_method=PUT` + `id` - Actualizar categoría
+- `POST /api/categorias.php` + `_method=DELETE` + `id` - Eliminar categoría
 
-## Datos de Ejemplo
+### 💻 Tecnologías Implementadas
+- **Backend**: PHP 8.x con PDO y prepared statements
+- **Base de Datos**: MySQL (producción) / SQLite (desarrollo)
+- **Frontend**: HTML5, CSS3, JavaScript ES6+
+- **APIs**: RESTful endpoints con manejo de errores
+- **UX/UI**: Responsive design, lazy loading, animaciones CSS
+- **DevOps**: Script automatizado de deployment FTP
 
-El sistema incluye datos de muestra del sector tecnológico:
+### 🎯 Funcionalidades CRUD Completas
+- ✅ **Productos**: Crear, Leer, Actualizar, Eliminar
+- ✅ **Categorías**: Crear, Leer, Actualizar, Eliminar
+- ✅ **Validaciones**: Integridad referencial y formularios
+- ✅ **Interfaz**: Modos visuales de edición y confirmaciones
+- ✅ **Mobile-First**: Optimizado para dispositivos móviles
 
-### Categorías Predefinidas
-- Smartphones
-- Laptops
-- Componentes PC
-- Audio
-- Gaming
-- Wearables
+---
 
-### Productos de Ejemplo (8 productos incluidos)
-- iPhone 15 Pro ($5.499.900 COP)
-- MacBook Pro M3 ($10.599.900 COP)
-- NVIDIA RTX 4080 ($5.099.900 COP)
-- Sony WH-1000XM5 ($1.699.900 COP)
-- PlayStation 5 ($2.199.900 COP)
-- Apple Watch Series 9 ($1.699.900 COP)
-- Samsung Galaxy S24 ($3.899.900 COP)
-- Dell XPS 15 ($8.099.900 COP)
+## 👨‍💻 Autor
 
-## Despliegue en InfinityFree
+Desarrollado para el **Taller Diagnóstico - Arquitectura Cloud y Hosting Gratuito**
 
-### Pasos para el despliegue:
-
-1. **Crear cuenta en InfinityFree**
-   - Registrarse en infinityfree.com
-   - Crear un nuevo sitio web
-
-2. **Subir archivos**
-   - Usar File Manager o FTP
-   - Subir todos los archivos al directorio `htdocs`
-
-3. **Configurar base de datos**
-   - Crear base de datos MySQL desde el panel de control
-   - Actualizar credenciales en `config/database.php`
-
-4. **Probar funcionalidad**
-   - Verificar que el sitio carga correctamente
-   - Probar formularios y base de datos
-
-
-
-## Autor
-
-Desarrollado para el Taller Diagnóstico - Arquitectura Cloud y Hosting Gratuito
-
-## Licencia
+## 📄 Licencia
 
 Este proyecto es de uso educativo.

@@ -413,6 +413,21 @@ body {
     color: #666;
 }
 
+/* Acciones de categoría */
+.categoria-acciones {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.7rem;
+    justify-content: center;
+}
+
+/* Modo edición para formulario de categorías */
+.modo-edicion-categoria {
+    background: linear-gradient(135deg, #fff8e1 0%, #fff3c4 100%) !important;
+    border: 2px solid #FF9800 !important;
+    border-radius: 8px !important;
+}
+
 /* Estadísticas */
 .estadisticas-grid {
     display: grid;
