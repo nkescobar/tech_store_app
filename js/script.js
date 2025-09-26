@@ -88,8 +88,12 @@ async function cargarProductos(filtros = {}) {
                     <span><strong>Stock:</strong> ${producto.stock}</span>
                 </div>
                 <div class="producto-acciones">
-                    <button onclick="editarProducto(${producto.id})" class="btn-editar">✏️ Editar</button>
-                    <button onclick="eliminarProducto(${producto.id})" class="btn-eliminar">🗑️ Eliminar</button>
+                    <button onclick="editarProducto(${producto.id})" class="btn-editar">
+                        Editar
+                    </button>
+                    <button onclick="eliminarProducto(${producto.id})" class="btn-eliminar">
+                        Eliminar
+                    </button>
                 </div>
             `;
 
@@ -350,6 +354,14 @@ async function editarProducto(id) {
         console.log('Producto data:', producto);
 
         if (response.ok) {
+            // Cambiar el título de la sección
+            const tituloSeccion = document.querySelector('#agregar h3');
+            tituloSeccion.innerHTML = '✏️ Editando Producto';
+
+            // Cambiar fondo de la sección para indicar modo edición
+            const seccionAgregar = document.getElementById('agregar');
+            seccionAgregar.classList.add('modo-edicion');
+
             // Llenar el formulario con los datos del producto
             document.getElementById('nombre').value = producto.nombre;
             document.getElementById('categoria').value = producto.categoria;
@@ -368,7 +380,7 @@ async function editarProducto(id) {
             if (!document.querySelector('.btn-cancelar')) {
                 const cancelBtn = document.createElement('button');
                 cancelBtn.type = 'button';
-                cancelBtn.textContent = 'Cancelar';
+                cancelBtn.textContent = 'Cancelar Edición';
                 cancelBtn.className = 'btn-cancelar';
                 cancelBtn.onclick = cancelarEdicion;
                 submitBtn.parentNode.insertBefore(cancelBtn, submitBtn.nextSibling);
@@ -379,7 +391,7 @@ async function editarProducto(id) {
             // Scroll al formulario
             document.getElementById('agregar').scrollIntoView({ behavior: 'smooth' });
 
-            mostrarMensaje('Editando producto. Modifica los campos y presiona "Actualizar"', 'info');
+            mostrarMensaje(`Editando producto: "${producto.nombre}"`, 'warning');
         } else {
             mostrarMensaje('Error al cargar producto: ' + producto.error, 'error');
         }
@@ -391,13 +403,24 @@ async function editarProducto(id) {
 
 // Función para cancelar edición
 function cancelarEdicion() {
+    // Restaurar título de la sección
+    const tituloSeccion = document.querySelector('#agregar h3');
+    tituloSeccion.innerHTML = 'Agregar Nuevo Producto';
+
+    // Quitar modo edición
+    const seccionAgregar = document.getElementById('agregar');
+    seccionAgregar.classList.remove('modo-edicion');
+
+    // Limpiar formulario
     const form = document.getElementById('productoForm');
     form.reset();
 
+    // Restaurar botón original
     const submitBtn = document.querySelector('#productoForm button[type="submit"]');
     submitBtn.textContent = 'Agregar Producto';
     submitBtn.className = '';
 
+    // Remover botón cancelar
     const cancelBtn = document.querySelector('.btn-cancelar');
     if (cancelBtn) {
         cancelBtn.remove();

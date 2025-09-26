@@ -73,8 +73,8 @@ upload_all() {
     upload_file "config/database.php" "config"
 
     # Frontend
-    upload_file "styles.css" "css"
-    upload_file "script.js" "js"
+    upload_file "css/styles.css" "css"
+    upload_file "js/script.js" "js"
 
     echo -e "${GREEN}🎉 ¡Despliegue completado!${NC}"
 }
@@ -95,10 +95,10 @@ case $1 in
         upload_file "config/database.php" "config"
         ;;
     "js")
-        upload_file "script.js" "js"
+        upload_file "js/script.js" "js"
         ;;
     "css")
-        upload_file "styles.css" "css"
+        upload_file "css/styles.css" "css"
         ;;
     *)
         echo "📋 Uso:"

@@ -115,6 +115,11 @@ body {
 /* Secciones */
 .section {
     padding: 3rem 0;
+    margin: 2rem 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    position: relative;
 }
 
 .section h3 {
@@ -122,6 +127,52 @@ body {
     margin-bottom: 2rem;
     font-size: 2rem;
     text-align: center;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.section h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 60px;
+    border-radius: 2px;
+}
+
+/* Colores distintivos por sección */
+#productos {
+    border-left: 6px solid #667eea;
+}
+
+#productos h3::before {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+#agregar {
+    border-left: 6px solid #4CAF50;
+    background: #f8fff8;
+}
+
+#agregar h3::before {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+
+#categorias {
+    border-left: 6px solid #FF9800;
+    background: #fff8f0;
+}
+
+#categorias h3::before {
+    background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+}
+
+/* Modo edición */
+.modo-edicion {
+    border-left: 6px solid #667eea !important;
+    background: linear-gradient(135deg, #f3f4ff 0%, #e8eaff 100%) !important;
 }
 
 .section h4 {
@@ -471,37 +522,47 @@ body {
 .producto-acciones {
     margin-top: 1rem;
     display: flex;
-    gap: 0.5rem;
+    gap: 0.7rem;
     justify-content: center;
 }
 
 .btn-editar, .btn-eliminar {
-    padding: 0.5rem 1rem;
+    padding: 0.7rem 1.2rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 0.9rem;
-    transition: all 0.3s;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 100px;
+    text-align: center;
 }
 
 .btn-editar {
-    background: #17a2b8;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
 }
 
 .btn-editar:hover {
-    background: #138496;
-    transform: translateY(-1px);
+    background: linear-gradient(135deg, #764ba2 0%, #5a67d8 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
 }
 
 .btn-eliminar {
-    background: #dc3545;
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
     color: white;
 }
 
 .btn-eliminar:hover {
-    background: #c82333;
-    transform: translateY(-1px);
+    background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
 }
 
 /* Botones del formulario */
