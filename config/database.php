@@ -24,8 +24,10 @@ class Database {
 
     private function isProduction() {
         // Detectar si estamos en InfinityFree u otro hosting
-        return isset($_SERVER['SERVER_NAME']) &&
-               strpos($_SERVER['SERVER_NAME'], 'infinityfree') !== false;
+        // También forzar MySQL si la variable DEBUG_MYSQL está definida
+        return (isset($_SERVER['SERVER_NAME']) &&
+               strpos($_SERVER['SERVER_NAME'], 'infinityfree') !== false) ||
+               getenv('DEBUG_MYSQL') === 'true';
     }
 
     private function connectMySQL() {

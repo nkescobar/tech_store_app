@@ -16,8 +16,11 @@ try {
     switch ($method) {
         case 'GET':
             if (isset($request[0]) && is_numeric($request[0])) {
-                // Obtener producto específico
+                // Obtener producto específico por URL path
                 getProducto($db, $request[0]);
+            } elseif (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                // Obtener producto específico por parámetro (para compatibilidad con InfinityFree)
+                getProducto($db, $_GET['id']);
             } else {
                 // Obtener todos los productos con filtros opcionales
                 getProductos($db);
@@ -25,7 +28,18 @@ try {
             break;
 
         case 'POST':
-            createProducto($db);
+            // Verificar si es una acción específica (para compatibilidad con InfinityFree)
+            if (isset($_POST['_method'])) {
+                if ($_POST['_method'] === 'DELETE' && isset($_POST['id'])) {
+                    deleteProducto($db, $_POST['id']);
+                } elseif ($_POST['_method'] === 'PUT' && isset($_POST['id'])) {
+                    updateProducto($db, $_POST['id']);
+                } else {
+                    createProducto($db);
+                }
+            } else {
+                createProducto($db);
+            }
             break;
 
         case 'PUT':
@@ -135,7 +149,14 @@ function createProducto($db) {
 }
 
 function updateProducto($db, $id) {
-    $input = json_decode(file_get_contents('php://input'), true);
+    // Detectar si viene de POST con FormData o de PUT con JSON
+    if (isset($_POST['_method']) && $_POST['_method'] === 'PUT') {
+        // Datos desde FormData (compatibilidad InfinityFree)
+        $input = $_POST;
+    } else {
+        // Datos desde JSON (método PUT tradicional)
+        $input = json_decode(file_get_contents('php://input'), true);
+    }
 
     if (!isset($input['nombre']) || !isset($input['categoria']) || !isset($input['precio'])) {
         http_response_code(400);

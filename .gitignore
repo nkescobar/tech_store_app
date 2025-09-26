@@ -1,0 +1,16 @@
+# Base de datos local
+database/techstore.db
+
+# Configuración FTP (contiene credenciales sensibles)
+ftp-config
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Archivos temporales
+*~
+*.tmp

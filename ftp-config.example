@@ -1,0 +1,14 @@
+# 🔧 Configuración FTP para TechStore
+# Copia este archivo a 'ftp-config' y personaliza con tus datos
+
+# Credenciales FTP de InfinityFree
+FTP_HOST="ftpupload.net"
+FTP_USER="tu_usuario_infinityfree"
+FTP_PASS="tu_password_infinityfree"
+REMOTE_PATH="htdocs"
+
+# Ejemplo con credenciales reales:
+# FTP_HOST="ftpupload.net"
+# FTP_USER="if0_40011644"
+# FTP_PASS="lqdc0hq28Ya977"
+# REMOTE_PATH="htdocs"

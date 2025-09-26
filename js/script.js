@@ -124,13 +124,20 @@ function configurarFormularios() {
             let response, result;
 
             if (editandoProductoId) {
-                // Actualizar producto existente
-                response = await fetch(`api/productos.php/${editandoProductoId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
+                // Actualizar producto existente usando POST para compatibilidad con InfinityFree
+                const updateFormData = new FormData();
+                updateFormData.append('_method', 'PUT');
+                updateFormData.append('id', editandoProductoId);
+
+                // Asegurar que todos los campos tengan valores, incluso si están vacíos
+                Object.keys(formData).forEach(key => {
+                    const value = formData[key] !== null && formData[key] !== undefined ? formData[key] : '';
+                    updateFormData.append(key, value);
+                });
+
+                response = await fetch('api/productos.php', {
+                    method: 'POST',
+                    body: updateFormData
                 });
             } else {
                 // Crear nuevo producto
@@ -336,8 +343,11 @@ function lazyLoadImage(img) {
 // Función para editar producto
 async function editarProducto(id) {
     try {
-        const response = await fetch(`api/productos.php/${id}`);
+        console.log('Editando producto ID:', id);
+        const response = await fetch(`api/productos.php?id=${id}`);
+        console.log('Response status:', response.status);
         const producto = await response.json();
+        console.log('Producto data:', producto);
 
         if (response.ok) {
             // Llenar el formulario con los datos del producto
@@ -404,9 +414,18 @@ async function eliminarProducto(id) {
     }
 
     try {
-        const response = await fetch(`api/productos.php/${id}`, {
-            method: 'DELETE'
+        console.log('Eliminando producto ID:', id);
+
+        // Usar POST con _method para compatibilidad con InfinityFree
+        const formData = new FormData();
+        formData.append('_method', 'DELETE');
+        formData.append('id', id);
+
+        const response = await fetch('api/productos.php', {
+            method: 'POST',
+            body: formData
         });
+        console.log('Delete response status:', response.status);
 
         const result = await response.json();
 
