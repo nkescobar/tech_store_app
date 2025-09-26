@@ -32,6 +32,12 @@ y moderna. El sistema incluye validaciones de integridad referencial y está opt
 
 
 ## 📝 Changelog (registro de cambios)
+- **[Nombre completo]** – Implementó sistema CRUD completo para productos y categorías con prepared statements.
+- **[Nombre completo]** – Diseñó interfaz responsive con CSS moderno y validaciones JavaScript.
+- **[Nombre completo]** – Configuró base de datos híbrida SQLite/MySQL y generó estructura de tablas.
+- **[Nombre completo]** – Desplegó proyecto en InfinityFree con script automatizado de deployment.
+- **[Nombre completo]** – Realizó pruebas de funcionalidad CRUD y validación de integridad referencial.
+- **[Nombre completo]** – Documentó proyecto completo con guías de instalación por sistema operativo.
 
 ## ❓ Preguntas de Reflexión (Cloud)
 
