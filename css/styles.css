@@ -627,6 +627,55 @@ footer {
     margin-top: 3rem;
 }
 
+/* Estilos para el menú de usuario */
+.user-menu {
+    position: relative;
+    margin-left: auto;
+    padding: 10px 0;
+}
+
+.user-info {
+    cursor: pointer;
+    padding: 5px 10px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+}
+
+.user-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    min-width: 150px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+.user-dropdown a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+}
+
+.user-dropdown a:hover {
+    background: #f5f5f5;
+}
+
+.user-menu:hover .user-dropdown {
+    display: block;
+}
+
+/* Asegurar que el menú de navegación sea flexible */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     /* Navbar móvil */

@@ -1,3 +1,8 @@
+<?php
+require_once 'config/session.php';
+requireLogin();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,6 +26,18 @@
                     <a href="#agregar" class="nav-link" onclick="closeNavMenu()">Agregar</a>
                     <a href="#categorias" class="nav-link" onclick="closeNavMenu()">Categorías</a>
                     <a href="#estadisticas" class="nav-link" onclick="closeNavMenu()">Estadísticas</a>
+
+                  <!-- Menú de usuario -->
+                  <div class="user-menu">
+                      <span class="user-info">Hola, <?php echo htmlspecialchars($_SESSION['user_nombre']); ?></span>
+                      <div class="user-dropdown">
+                          <a href="profile.php">Mi Perfil</a>
+                          <?php if (isAdmin()): ?>
+                          <a href="admin.php">Panel Admin</a>
+                          <?php endif; ?>
+                          <a href="logout.php">Cerrar Sesión</a>
+                      </div>
+                  </div>
                 </div>
             </div>
         </nav>
