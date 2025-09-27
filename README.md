@@ -102,10 +102,6 @@ CREATE TABLE usuarios (
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     activo BOOLEAN DEFAULT TRUE
 );
-
--- Insertar un usuario admin por defecto (contraseña: admin123)
-INSERT INTO usuarios (username, email, password_hash, nombre_completo, rol) 
-VALUES ('admin', 'admin@techstore.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrador Principal', 'admin');
 ```
 
 

@@ -94,7 +94,17 @@ class Database {
 
     private function createTables() {
         if ($this->isProduction()) {
-            // Sintaxis MySQL para producción
+          // Sintaxis MySQL para producción
+            $sqlUsuarios = "CREATE TABLE usuarios (
+              id INT PRIMARY KEY AUTO_INCREMENT,
+              username VARCHAR(50) UNIQUE NOT NULL,
+              email VARCHAR(100) UNIQUE NOT NULL,
+              password_hash VARCHAR(255) NOT NULL,
+              nombre_completo VARCHAR(100) NOT NULL,
+              rol ENUM('admin', 'usuario') DEFAULT 'usuario',
+              fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+              activo BOOLEAN DEFAULT TRUE
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
             $sqlProductos = "CREATE TABLE IF NOT EXISTS productos (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 nombre VARCHAR(255) NOT NULL,
@@ -113,7 +123,17 @@ class Database {
                 descripcion TEXT
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
         } else {
-            // Sintaxis SQLite para desarrollo local
+          // Sintaxis SQLite para desarrollo local
+            $sqlUsuarios = "CREATE TABLE usuarios (
+              id INT PRIMARY KEY AUTO_INCREMENT,
+              username VARCHAR(50) UNIQUE NOT NULL,
+              email VARCHAR(100) UNIQUE NOT NULL,
+              password_hash VARCHAR(255) NOT NULL,
+              nombre_completo VARCHAR(100) NOT NULL,
+              rol ENUM('admin', 'usuario') DEFAULT 'usuario',
+              fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+              activo BOOLEAN DEFAULT TRUE
+            )";
             $sqlProductos = "CREATE TABLE IF NOT EXISTS productos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT NOT NULL,
@@ -133,11 +153,29 @@ class Database {
             )";
         }
 
+                $this->pdo->exec($sqlProductos);
+
+        $this->pdo->exec($sqlUsuarios);
         $this->pdo->exec($sqlProductos);
         $this->pdo->exec($sqlCategorias);
     }
 
     private function insertInitialData() {
+        // Verificar si ya existen usuarios
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM usuarios");
+        $count = $stmt->fetchColumn();
+
+        if ($count == 0) {
+            $usuarios = [
+              ['admin', 'admin@techstore.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrador Principal', 'admin'],
+            ];
+
+            $stmt = $this->pdo->prepare("INSERT INTO usuarios (username, email, password_hash, nombre_completo, rol, fecha_creacion, activo) VALUES (?, ?, ?, ?, ?)");
+            foreach ($usuarios as $usuario) {
+                $stmt->execute($usuario);
+            }
+        }
+
         // Verificar si ya existen categorías
         $stmt = $this->pdo->query("SELECT COUNT(*) FROM categorias");
         $count = $stmt->fetchColumn();
