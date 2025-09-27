@@ -88,6 +88,23 @@ y moderna. El sistema incluye validaciones de integridad referencial y está opt
 
 ## 🗄️ Base de Datos
 
+### Tabla usuarios
+
+```sql
+
+CREATE TABLE usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    nombre_completo VARCHAR(100) NOT NULL,
+    rol ENUM('admin', 'usuario') DEFAULT 'usuario',
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    activo BOOLEAN DEFAULT TRUE
+);
+```
+
+
 ### Tabla `productos`
 ```sql
 CREATE TABLE productos (
