@@ -3,3 +3,8 @@ https://techstoreapp.infinityfreeapp.com
 Login de prueba:
 Usuario: admin
 Contraseña: admin123
+
+NOTA IMPORTANTE:
+- Si el navegador marca como "sitio peligroso", es normal en hosting gratuito
+- Seleccionar "Continuar al sitio" o "Avanzado > Continuar"
+- El sitio es seguro, solo InfinityFree tiene reputación variable
