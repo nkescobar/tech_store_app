@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechStore - Gestión de Productos Tecnológicos</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="static/css/styles.css">
 </head>
 <body>
     <header>
@@ -50,7 +50,12 @@
 
         <section id="productos" class="section">
             <div class="container">
-                <h3>Catálogo de Productos</h3>
+                <div class="section-header">
+                    <h3>Catálogo de Productos</h3>
+                    <button onclick="exportarProductos()" class="btn-export">
+                        📊 Exportar CSV
+                    </button>
+                </div>
                 <div id="productosGrid" class="productos-grid">
                     <div class="loading">Cargando productos...</div>
                 </div>
@@ -98,7 +103,12 @@
 
         <section id="categorias" class="section">
             <div class="container">
-                <h3>Gestión de Categorías</h3>
+                <div class="section-header">
+                    <h3>Gestión de Categorías</h3>
+                    <button onclick="exportarCategorias()" class="btn-export">
+                        📊 Exportar CSV
+                    </button>
+                </div>
                 <div class="categorias-container">
                     <div class="categorias-form">
                         <h4>Agregar Nueva Categoría</h4>
@@ -196,6 +206,6 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="static/js/script.js"></script>
 </body>
 </html>

@@ -641,3 +641,62 @@ async function eliminarCategoria(id) {
         mostrarMensaje('Error al conectar con el servidor', 'error');
     }
 }
+
+// Funciones de exportar CSV
+function exportarProductos() {
+    try {
+        mostrarMensaje('Generando archivo CSV de productos...', 'info');
+
+        // Abrir en nueva ventana para descargar
+        const url = 'api/export.php?type=productos';
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `productos_techstore_${new Date().toISOString().slice(0, 10)}.csv`;
+
+        // Para navegadores que no soportan download attribute
+        if (typeof link.download === 'undefined') {
+            window.open(url, '_blank');
+        } else {
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        setTimeout(() => {
+            mostrarMensaje('Archivo CSV de productos descargado exitosamente', 'exito');
+        }, 1000);
+
+    } catch (error) {
+        console.error('Error al exportar productos:', error);
+        mostrarMensaje('Error al generar CSV de productos', 'error');
+    }
+}
+
+function exportarCategorias() {
+    try {
+        mostrarMensaje('Generando archivo CSV de categorías...', 'info');
+
+        // Abrir en nueva ventana para descargar
+        const url = 'api/export.php?type=categorias';
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `categorias_techstore_${new Date().toISOString().slice(0, 10)}.csv`;
+
+        // Para navegadores que no soportan download attribute
+        if (typeof link.download === 'undefined') {
+            window.open(url, '_blank');
+        } else {
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        setTimeout(() => {
+            mostrarMensaje('Archivo CSV de categorías descargado exitosamente', 'exito');
+        }, 1000);
+
+    } catch (error) {
+        console.error('Error al exportar categorías:', error);
+        mostrarMensaje('Error al generar CSV de categorías', 'error');
+    }
+}

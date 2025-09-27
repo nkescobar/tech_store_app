@@ -68,13 +68,14 @@ upload_all() {
     # API
     upload_file "api/productos.php" "api"
     upload_file "api/categorias.php" "api"
+    upload_file "api/export.php" "api"
 
     # Configuración
     upload_file "config/database.php" "config"
 
-    # Frontend
-    upload_file "css/styles.css" "css"
-    upload_file "js/script.js" "js"
+    # Frontend (assets estáticos)
+    upload_file "static/css/styles.css" "static/css"
+    upload_file "static/js/script.js" "static/js"
 
     echo -e "${GREEN}🎉 ¡Despliegue completado!${NC}"
 }
@@ -90,15 +91,16 @@ case $1 in
     "api")
         upload_file "api/productos.php" "api"
         upload_file "api/categorias.php" "api"
+        upload_file "api/export.php" "api"
         ;;
     "config")
         upload_file "config/database.php" "config"
         ;;
     "js")
-        upload_file "js/script.js" "js"
+        upload_file "static/js/script.js" "static/js"
         ;;
     "css")
-        upload_file "css/styles.css" "css"
+        upload_file "static/css/styles.css" "static/css"
         ;;
     *)
         echo "📋 Uso:"
