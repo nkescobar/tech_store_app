@@ -88,6 +88,27 @@ y moderna. El sistema incluye validaciones de integridad referencial y está opt
 
 ## 🗄️ Base de Datos
 
+### Tabla usuarios
+
+```sql
+
+CREATE TABLE usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    nombre_completo VARCHAR(100) NOT NULL,
+    rol ENUM('admin', 'usuario') DEFAULT 'usuario',
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    activo BOOLEAN DEFAULT TRUE
+);
+
+-- Insertar un usuario admin por defecto (contraseña: admin123)
+INSERT INTO usuarios (username, email, password_hash, nombre_completo, rol) 
+VALUES ('admin', 'admin@techstore.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrador Principal', 'admin');
+```
+
+
 ### Tabla `productos`
 ```sql
 CREATE TABLE productos (
