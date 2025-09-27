@@ -1,10 +1,10 @@
 <?php
-session_start();
-
-// Configuración de seguridad para sesiones
+// Configuración de seguridad para sesiones (antes de iniciar la sesión)
 ini_set('session.cookie_httponly', 1);
 ini_set('session.cookie_secure', 1);
 ini_set('session.use_strict_mode', 1);
+
+session_start();
 
 // Regenerar ID de sesión periódicamente para mayor seguridad
 if (!isset($_SESSION['last_regeneration'])) {

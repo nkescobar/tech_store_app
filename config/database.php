@@ -124,15 +124,15 @@ class Database {
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
         } else {
           // Sintaxis SQLite para desarrollo local
-            $sqlUsuarios = "CREATE TABLE usuarios (
-              id INT PRIMARY KEY AUTO_INCREMENT,
-              username VARCHAR(50) UNIQUE NOT NULL,
-              email VARCHAR(100) UNIQUE NOT NULL,
-              password_hash VARCHAR(255) NOT NULL,
-              nombre_completo VARCHAR(100) NOT NULL,
-              rol ENUM('admin', 'usuario') DEFAULT 'usuario',
-              fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-              activo BOOLEAN DEFAULT TRUE
+            $sqlUsuarios = "CREATE TABLE IF NOT EXISTS usuarios (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              username TEXT UNIQUE NOT NULL,
+              email TEXT UNIQUE NOT NULL,
+              password_hash TEXT NOT NULL,
+              nombre_completo TEXT NOT NULL,
+              rol TEXT DEFAULT 'usuario' CHECK(rol IN ('admin', 'usuario')),
+              fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+              activo INTEGER DEFAULT 1
             )";
             $sqlProductos = "CREATE TABLE IF NOT EXISTS productos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -153,8 +153,6 @@ class Database {
             )";
         }
 
-                $this->pdo->exec($sqlProductos);
-
         $this->pdo->exec($sqlUsuarios);
         $this->pdo->exec($sqlProductos);
         $this->pdo->exec($sqlCategorias);
@@ -170,7 +168,7 @@ class Database {
               ['admin', 'admin@techstore.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrador Principal', 'admin'],
             ];
 
-            $stmt = $this->pdo->prepare("INSERT INTO usuarios (username, email, password_hash, nombre_completo, rol, fecha_creacion, activo) VALUES (?, ?, ?, ?, ?)");
+            $stmt = $this->pdo->prepare("INSERT INTO usuarios (username, email, password_hash, nombre_completo, rol) VALUES (?, ?, ?, ?, ?)");
             foreach ($usuarios as $usuario) {
                 $stmt->execute($usuario);
             }

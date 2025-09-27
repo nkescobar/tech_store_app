@@ -19,12 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db = $database->getConnection();
         
         // Buscar usuario por username o email
-        $stmt = $db->prepare("SELECT * FROM usuarios WHERE (username = :username OR email = :username) AND activo = TRUE");
-        $stmt->bindParam(':username', $username);
-        $stmt->execute();
-        
-        if ($stmt->rowCount() === 1) {
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = $db->prepare("SELECT * FROM usuarios WHERE (username = ? OR email = ?) AND activo = 1");
+        $stmt->execute([$username, $username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
             
             // Verificar contraseña
             if (password_verify($password, $user['password_hash'])) {
@@ -57,54 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechStore - Iniciar Sesión</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <style>
-        .login-container {
-            max-width: 400px;
-            margin: 100px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .login-form .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .login-form label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .login-form input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .login-form button {
-            width: 100%;
-            padding: 10px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        .error-message {
-            color: red;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .login-links {
-            text-align: center;
-            margin-top: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="static/css/styles.css">
 </head>
 <body>
     <header>
