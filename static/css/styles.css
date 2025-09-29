@@ -417,8 +417,9 @@ body {
 .categoria-acciones {
     margin-top: 1rem;
     display: flex;
-    gap: 0.7rem;
+    gap: 1.5rem;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 /* Modo edición para formulario de categorías */
@@ -650,6 +651,26 @@ body {
     background: #5a6268;
 }
 
+/* Botones específicos de categorías */
+.btn-actualizar-categoria {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+    margin-bottom: 0.8rem !important;
+}
+
+.btn-cancelar-categoria {
+    background: #6c757d !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.8rem 1rem !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    margin-bottom: 0.8rem !important;
+}
+
+.btn-cancelar-categoria:hover {
+    background: #5a6268 !important;
+}
+
 .loading {
     text-align: center;
     padding: 2rem;
@@ -673,6 +694,57 @@ footer {
     text-align: center;
     padding: 2rem 0;
     margin-top: 3rem;
+}
+
+/* Estilos para el menú de usuario */
+.user-menu {
+    position: relative;
+    margin-left: auto;
+    padding: 10px 0;
+}
+
+.user-info {
+    cursor: pointer;
+    padding: 5px 10px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
+}
+
+.user-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    min-width: 150px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+.user-dropdown a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+}
+
+.user-dropdown a:hover {
+    background: #f5f5f5;
+}
+
+.user-menu:hover .user-dropdown {
+    display: block;
+}
+
+/* Asegurar que el menú de navegación sea flexible */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 /* Responsive */
@@ -746,4 +818,291 @@ footer {
     .stat-number {
         font-size: 2rem;
     }
+
+    /* Menú de usuario responsive */
+    .user-menu {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+
+    .user-info {
+        font-size: 0.85rem;
+        padding: 5px 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 120px;
+    }
+
+    .user-dropdown {
+        right: 0;
+        min-width: 140px;
+        font-size: 0.9rem;
+    }
+
+    .user-dropdown a {
+        padding: 8px 12px;
+    }
+}
+
+/* ==================== LOGIN PAGE STYLES ==================== */
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.login-form .form-group {
+    margin-bottom: 15px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.login-links {
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* ==================== PROFILE PAGE STYLES ==================== */
+.profile-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 20px;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.profile-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 1rem;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.profile-role {
+    background: rgba(255,255,255,0.2);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.profile-content {
+    background: white;
+}
+
+.tab-content {
+    padding: 2rem;
+}
+
+.info-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+}
+
+.info-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.info-details h4 {
+    margin: 0 0 0.3rem 0;
+    color: #2c3e50;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.info-details p {
+    margin: 0;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.btn-edit {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-edit:hover {
+    background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+    transform: translateY(-2px);
+}
+
+/* ==================== ADMIN PAGE STYLES ==================== */
+.admin-dashboard {
+    min-height: calc(100vh - 200px);
+    padding: 2rem 0;
+}
+
+.admin-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.admin-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.admin-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.admin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.admin-card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.admin-card h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.admin-card p {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.admin-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.admin-btn:hover {
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+    transform: translateY(-2px);
+}
+
+.recent-activity {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.activity-text {
+    flex: 1;
+}
+
+.activity-time {
+    color: #666;
+    font-size: 0.9rem;
 }

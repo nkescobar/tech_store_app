@@ -44,7 +44,7 @@ async function cargarCategorias() {
         });
     } catch (error) {
         console.error('Error al cargar categorías:', error);
-        mostrarMensaje('Error al cargar categorías', 'error');
+        mostrarMensaje('Error al cargar categorías', 'error', document.getElementById('categorias'));
     }
 }
 
@@ -112,7 +112,7 @@ async function cargarProductos(filtros = {}) {
         });
     } catch (error) {
         console.error('Error al cargar productos:', error);
-        mostrarMensaje('Error al cargar productos', 'error');
+        mostrarMensaje('Error al cargar productos', 'error', document.getElementById('productos'));
     }
 }
 
@@ -166,7 +166,7 @@ function configurarFormularios() {
 
             if (response.ok) {
                 const mensaje = editandoProductoId ? 'Producto actualizado exitosamente' : 'Producto agregado exitosamente';
-                mostrarMensaje(mensaje, 'exito');
+                mostrarMensaje(mensaje, 'exito', document.getElementById('agregar'));
 
                 // Resetear formulario
                 productoForm.reset();
@@ -188,11 +188,11 @@ function configurarFormularios() {
                 document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
             } else {
                 const accion = editandoProductoId ? 'actualizar' : 'agregar';
-                mostrarMensaje(`Error al ${accion} producto: ` + (result.error || 'Error desconocido'), 'error');
+                mostrarMensaje(`Error al ${accion} producto: ` + (result.error || 'Error desconocido'), 'error', document.getElementById('agregar'));
             }
         } catch (error) {
             console.error('Error:', error);
-            mostrarMensaje('Error al conectar con el servidor', 'error');
+            mostrarMensaje('Error al conectar con el servidor', 'error', document.getElementById('agregar'));
         }
     });
 
@@ -218,11 +218,11 @@ function configurarFormularios() {
                 const result = await response.json();
 
                 if (response.ok) {
-                    mostrarMensaje('Categoría actualizada exitosamente', 'exito', categoriaForm.parentNode);
-                    cancelarEdicionCategoria();
+                    mostrarMensaje('Categoría actualizada exitosamente', 'exito', document.getElementById('categorias'));
+                    cancelarEdicionCategoria(false);
                     cargarCategorias();
                 } else {
-                    mostrarMensaje('Error al actualizar categoría: ' + (result.error || 'Error desconocido'), 'error', categoriaForm.parentNode);
+                    mostrarMensaje('Error al actualizar categoría: ' + (result.error || 'Error desconocido'), 'error', document.getElementById('categorias'));
                 }
             } else {
                 // Crear nueva categoría
@@ -242,16 +242,16 @@ function configurarFormularios() {
                 const result = await response.json();
 
                 if (response.ok) {
-                    mostrarMensaje('Categoría agregada exitosamente', 'exito', categoriaForm.parentNode);
+                    mostrarMensaje('Categoría agregada exitosamente', 'exito', document.getElementById('categorias'));
                     categoriaForm.reset();
                     cargarCategorias();
                 } else {
-                    mostrarMensaje('Error al agregar categoría: ' + (result.error || 'Error desconocido'), 'error', categoriaForm.parentNode);
+                    mostrarMensaje('Error al agregar categoría: ' + (result.error || 'Error desconocido'), 'error', document.getElementById('categorias'));
                 }
             }
         } catch (error) {
             console.error('Error:', error);
-            mostrarMensaje('Error al conectar con el servidor', 'error', categoriaForm.parentNode);
+            mostrarMensaje('Error al conectar con el servidor', 'error', document.getElementById('categorias'));
         }
     });
 }
@@ -424,13 +424,13 @@ async function editarProducto(id) {
             // Scroll al formulario
             document.getElementById('agregar').scrollIntoView({ behavior: 'smooth' });
 
-            mostrarMensaje(`Editando producto: "${producto.nombre}"`, 'warning');
+            mostrarMensaje('Modo edición activado', 'warning', document.getElementById('agregar'));
         } else {
-            mostrarMensaje('Error al cargar producto: ' + producto.error, 'error');
+            mostrarMensaje('Error al cargar producto: ' + producto.error, 'error', document.getElementById('agregar'));
         }
     } catch (error) {
         console.error('Error:', error);
-        mostrarMensaje('Error al cargar producto', 'error');
+        mostrarMensaje('Error al cargar producto', 'error', document.getElementById('agregar'));
     }
 }
 
@@ -460,7 +460,7 @@ function cancelarEdicion() {
     }
 
     editandoProductoId = null;
-    mostrarMensaje('Edición cancelada', 'info');
+    mostrarMensaje('Edición cancelada', 'info', document.getElementById('agregar'));
 }
 
 // Función para eliminar producto
@@ -486,14 +486,14 @@ async function eliminarProducto(id) {
         const result = await response.json();
 
         if (response.ok) {
-            mostrarMensaje('Producto eliminado exitosamente', 'exito');
+            mostrarMensaje('Producto eliminado exitosamente', 'exito', document.getElementById('productos'));
             cargarProductos();
         } else {
-            mostrarMensaje('Error al eliminar producto: ' + result.error, 'error');
+            mostrarMensaje('Error al eliminar producto: ' + result.error, 'error', document.getElementById('productos'));
         }
     } catch (error) {
         console.error('Error:', error);
-        mostrarMensaje('Error al eliminar producto', 'error');
+        mostrarMensaje('Error al eliminar producto', 'error', document.getElementById('productos'));
     }
 }
 
@@ -551,7 +551,7 @@ async function editarCategoria(id) {
             // Cambiar el botón del formulario
             const submitBtn = document.querySelector('#categoriaForm button[type="submit"]');
             submitBtn.textContent = 'Actualizar Categoría';
-            submitBtn.className = 'btn-actualizar';
+            submitBtn.className = 'btn-actualizar-categoria';
 
             // Añadir botón cancelar si no existe
             if (!document.querySelector('.btn-cancelar-categoria')) {
@@ -568,18 +568,18 @@ async function editarCategoria(id) {
             // Scroll al formulario
             document.getElementById('categorias').scrollIntoView({ behavior: 'smooth' });
 
-            mostrarMensaje(`Editando categoría: "${categoria.nombre}"`, 'warning');
+            mostrarMensaje('Modo edición activado', 'warning', document.getElementById('categorias'));
         } else {
-            mostrarMensaje('Error al cargar categoría: ' + categoria.error, 'error');
+            mostrarMensaje('Error al cargar categoría: ' + categoria.error, 'error', document.getElementById('categorias'));
         }
     } catch (error) {
         console.error('Error:', error);
-        mostrarMensaje('Error al cargar categoría', 'error');
+        mostrarMensaje('Error al cargar categoría', 'error', document.getElementById('categorias'));
     }
 }
 
 // Función para cancelar edición de categoría
-function cancelarEdicionCategoria() {
+function cancelarEdicionCategoria(mostrarMensajeCancelacion = true) {
     // Restaurar título del formulario
     const tituloFormulario = document.querySelector('.categorias-form h4');
     tituloFormulario.innerHTML = 'Agregar Nueva Categoría';
@@ -595,7 +595,7 @@ function cancelarEdicionCategoria() {
     // Restaurar botón original
     const submitBtn = document.querySelector('#categoriaForm button[type="submit"]');
     submitBtn.textContent = 'Agregar Categoría';
-    submitBtn.className = '';
+    submitBtn.className = 'btn';
 
     // Remover botón cancelar
     const cancelBtn = document.querySelector('.btn-cancelar-categoria');
@@ -604,7 +604,9 @@ function cancelarEdicionCategoria() {
     }
 
     editandoCategoriaId = null;
-    mostrarMensaje('Edición de categoría cancelada', 'info');
+    if (mostrarMensajeCancelacion) {
+        mostrarMensaje('Edición cancelada', 'info', document.getElementById('categorias'));
+    }
 }
 
 // Función para eliminar categoría
@@ -627,7 +629,7 @@ async function eliminarCategoria(id) {
         console.log('Respuesta eliminación categoría:', response.status, result);
 
         if (response.ok) {
-            mostrarMensaje('Categoría eliminada exitosamente', 'exito');
+            mostrarMensaje('Categoría eliminada exitosamente', 'exito', document.getElementById('categorias'));
             cargarCategorias();
         } else {
             // Mostrar error en un alert más visible para casos específicos
@@ -645,7 +647,7 @@ async function eliminarCategoria(id) {
 // Funciones de exportar CSV
 function exportarProductos() {
     try {
-        mostrarMensaje('Generando archivo CSV de productos...', 'info');
+        mostrarMensaje('Generando archivo CSV de productos...', 'info', document.getElementById('productos'));
 
         // Abrir en nueva ventana para descargar
         const url = 'api/export.php?type=productos';
@@ -663,18 +665,18 @@ function exportarProductos() {
         }
 
         setTimeout(() => {
-            mostrarMensaje('Archivo CSV de productos descargado exitosamente', 'exito');
+            mostrarMensaje('Archivo CSV de productos descargado exitosamente', 'exito', document.getElementById('productos'));
         }, 1000);
 
     } catch (error) {
         console.error('Error al exportar productos:', error);
-        mostrarMensaje('Error al generar CSV de productos', 'error');
+        mostrarMensaje('Error al generar CSV de productos', 'error', document.getElementById('productos'));
     }
 }
 
 function exportarCategorias() {
     try {
-        mostrarMensaje('Generando archivo CSV de categorías...', 'info');
+        mostrarMensaje('Generando archivo CSV de categorías...', 'info', document.getElementById('categorias'));
 
         // Abrir en nueva ventana para descargar
         const url = 'api/export.php?type=categorias';
@@ -692,11 +694,11 @@ function exportarCategorias() {
         }
 
         setTimeout(() => {
-            mostrarMensaje('Archivo CSV de categorías descargado exitosamente', 'exito');
+            mostrarMensaje('Archivo CSV de categorías descargado exitosamente', 'exito', document.getElementById('categorias'));
         }, 1000);
 
     } catch (error) {
         console.error('Error al exportar categorías:', error);
-        mostrarMensaje('Error al generar CSV de categorías', 'error');
+        mostrarMensaje('Error al generar CSV de categorías', 'error', document.getElementById('categorias'));
     }
 }
