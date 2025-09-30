@@ -1,8 +1,13 @@
 <?php
 // Configuración de seguridad para sesiones (antes de iniciar la sesión)
 ini_set('session.cookie_httponly', 1);
-ini_set('session.cookie_secure', 1);
+// Ajuste para InfinityFree - desactivar secure por problemas SSL intermitentes
+ini_set('session.cookie_secure', 0);
 ini_set('session.use_strict_mode', 1);
+ini_set('session.cookie_samesite', 'Lax');
+// Configuración específica para InfinityFree
+ini_set('session.gc_maxlifetime', 86400); // 24 horas
+ini_set('session.cookie_lifetime', 86400);
 
 session_start();
 
@@ -28,7 +33,7 @@ function isAdmin() {
 // Función para requerir login
 function requireLogin() {
     if (!isLoggedIn()) {
-        header('Location: login.php');
+        header('Location: access.php');
         exit();
     }
 }

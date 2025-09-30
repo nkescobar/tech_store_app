@@ -95,7 +95,7 @@ class Database {
     private function createTables() {
         if ($this->isProduction()) {
           // Sintaxis MySQL para producción
-            $sqlUsuarios = "CREATE TABLE usuarios (
+            $sqlUsuarios = "CREATE TABLE IF NOT EXISTS usuarios (
               id INT PRIMARY KEY AUTO_INCREMENT,
               username VARCHAR(50) UNIQUE NOT NULL,
               email VARCHAR(100) UNIQUE NOT NULL,
@@ -165,7 +165,7 @@ class Database {
 
         if ($count == 0) {
             $usuarios = [
-              ['admin', 'admin@techstore.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrador Principal', 'admin'],
+              ['admin', 'admin@techstore.com', '$2y$12$Z10jFLdSZXyPRnQCcEi75eoF.QxK8.CCW9lDGUrmwQZ8UTtau6cyq', 'Administrador Principal', 'admin'],
             ];
 
             $stmt = $this->pdo->prepare("INSERT INTO usuarios (username, email, password_hash, nombre_completo, rol) VALUES (?, ?, ?, ?, ?)");

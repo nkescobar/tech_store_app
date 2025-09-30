@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
             <?php endif; ?>
             
-            <form class="login-form" method="POST" action="login.php">
+            <form class="login-form" method="POST" action="access.php">
                 <div class="form-group">
                     <label for="username">Usuario o Email:</label>
                     <input type="text" id="username" name="username" required value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
