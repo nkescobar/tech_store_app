@@ -32,7 +32,7 @@ requireAdmin(); // Solo administradores pueden acceder
                         <span class="user-info">Hola, <?php echo htmlspecialchars($_SESSION['user_nombre']); ?></span>
                         <div class="user-dropdown">
                             <a href="profile.php">Mi Perfil</a>
-                            <a href="admin.php">Panel Admin</a>
+                            <a href="panel.php">Panel Admin</a>
                             <a href="logout.php">Cerrar Sesión</a>
                         </div>
                     </div>

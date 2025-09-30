@@ -1,0 +1,43 @@
+# Configuración de seguridad para InfinityFree
+# Habilitar rewrite engine
+RewriteEngine On
+
+# No forzar HTTPS debido a problemas SSL intermitentes en InfinityFree
+# RewriteCond %{HTTPS} off
+# RewriteCond %{HTTP_HOST} infinityfreeapp\.com$ [NC]
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Headers de seguridad
+<IfModule mod_headers.c>
+    # Prevenir clickjacking
+    Header always append X-Frame-Options SAMEORIGIN
+    # Prevenir MIME sniffing
+    Header set X-Content-Type-Options nosniff
+    # XSS Protection
+    Header set X-XSS-Protection "1; mode=block"
+    # Referrer Policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Configuración PHP para InfinityFree
+<IfModule mod_php.c>
+    php_value session.cookie_httponly 1
+    php_value session.use_strict_mode 1
+    php_value session.cookie_samesite "Lax"
+</IfModule>
+
+# Proteger archivos sensibles
+<Files "*.db">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files ".env">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Permitir acceso a archivos estáticos
+<FilesMatch "\.(css|js|png|jpg|jpeg|gif|ico|svg)$">
+    Header set Cache-Control "public, max-age=2592000"
+</FilesMatch>
