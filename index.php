@@ -33,7 +33,7 @@ requireLogin();
                       <div class="user-dropdown">
                           <a href="profile.php">Mi Perfil</a>
                           <?php if (isAdmin()): ?>
-                          <a href="admin.php">Panel Admin</a>
+                          <a href="panel.php">Panel Admin</a>
                           <?php endif; ?>
                           <a href="logout.php">Cerrar Sesión</a>
                       </div>
