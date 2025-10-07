@@ -25,21 +25,29 @@ class Database {
         }
     }
 
-    private function loadConfig() {
-        if ($this->isProduction()) {
-            // Configuración para producción (InfinityFree)
-            $this->host = 'sql303.infinityfree.com';
-            $this->dbname = 'if0_40011644_techstore_db';
-            $this->username = 'if0_40011644';
-            $this->password = 'lqdc0hq28Ya977';
-        } else {
-            // Configuración para desarrollo local (MySQL opcional)
-            $this->host = 'localhost';
-            $this->dbname = 'techstore_db';
-            $this->username = 'root';
-            $this->password = '';
-        }
-    }
+ private function loadConfig() {
+      // Verificar si estamos en Docker (tiene variables de entorno DB_HOST)
+      if (getenv('DB_HOST')) {
+          // Configuración desde variables de entorno (Docker)
+          $this->host = getenv('DB_HOST');
+          $this->dbname = getenv('DB_NAME');
+          $this->username = getenv('DB_USER');
+          $this->password = getenv('DB_PASSWORD');
+      } elseif ($this->isProduction()) {
+          // Configuración para producción (InfinityFree)
+          $this->host = 'sql303.infinityfree.com';
+          $this->dbname = 'if0_40011644_techstore_db';
+          $this->username = 'if0_40011644';
+          $this->password = 'lqdc0hq28Ya977';
+      } else {
+          // Configuración para desarrollo local (MySQL opcional)
+          $this->host = 'localhost';
+          $this->dbname = 'techstore_db';
+          $this->username = 'root';
+          $this->password = '';
+      }
+  }
+
 
     private function isProduction() {
         // Detectar si estamos en InfinityFree u otro hosting

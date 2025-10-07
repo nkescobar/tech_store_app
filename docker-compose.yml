@@ -1,0 +1,46 @@
+services:
+    app:
+      build: .
+      container_name: techstore-app
+      ports:
+        - "8080:80"
+      volumes:
+        - ./:/var/www/html
+      depends_on:
+        - db
+      environment:
+        - DEBUG_MYSQL=true
+        - DB_HOST=db
+        - DB_NAME=${MYSQL_DATABASE}
+        - DB_USER=${MYSQL_USER}
+        - DB_PASSWORD=${MYSQL_PASSWORD}
+        - TZ=America/Bogota
+
+    db:
+      image: mysql:8.0
+      container_name: techstore-db
+      environment:
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - TZ=America/Bogota
+      volumes:
+        - db_data:/var/lib/mysql
+      ports:
+        - "3306:3306"
+
+    phpmyadmin:
+      image: phpmyadmin:latest
+      container_name: techstore-pma
+      environment:
+        - PMA_HOST=db
+        - PMA_USER=${MYSQL_USER}
+        - PMA_PASSWORD=${MYSQL_PASSWORD}
+      ports:
+        - "8081:80"
+      depends_on:
+        - db
+
+volumes:
+    db_data:
